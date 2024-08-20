@@ -8,13 +8,15 @@ module.exports = {
         'button-red': '#DC2626', // Custom red color for buttons
         'button-green': '#10B981', // Custom green color for buttons
         'button-white': '#FFFFFF', // Custom white color for buttons
+        'button-transparent' : 'rgba(255, 255, 255, 0.0)', // Custom transparent color for buttons
         //TEXT COLORS
         'button-text': '#FFFFFF', // Custom text color for buttons
+        'button-text-golden': '#FFE8B6', // Custom text color for buttons
         'button-text-black': '#000000', // Custom text color
+        'text-title' : '#EED6BA', //Black color for the title
+        'button-text-hover-golden': '#B89958', // Custom text color for buttons
         //BUTTON HOVER
         'button-blue-hover': '#212e40', // Custom blue color for buttons
-        //COLOR FOR TEXT
-        'text-title' : '#EED6BA', //Black color for the title
         //COLOR FOR NAV BAR
         'nav-bar' : '#000000', //White color for the nav bar
         //COLOR FOR PAGE BACKGROUND

@@ -1,26 +1,41 @@
-export default function NavBar () {
+//Nav bar component for mobile devices, adding a side menu for navigation.
+
+    //import the feather javascript file from node_modules\feather-icons\dist\feather.js
+
+
+
+export default function NavBarMobile() {
 
     //function to handle the login button click
     function handleLoginClick(){
-       window.location.href = '/src//pages/login.html';
+        window.location.href = '/src/pages/login.html';
     }
     function handleSignUpClick(){
-       window.location.href = '/src/pages/signUp.html';
+        window.location.href = '/src/pages/signUp.html';
+    }
+    //function that handles the hiding and showing of the side menu
+    function handleSideMenuClick(){
+        let sideMenu = document.getElementById('side-menu');
+        if(sideMenu.style.display === 'none'){
+            sideMenu.style.display = 'block';
+        }else{
+            sideMenu.style.display = 'none';
+        }
     }
 
-    return{
-       //return the nav bar html
-       render: () => {
-          return `
-             <nav class="bg-nav-bar flex justify-between p-4 items-center">
-                <a href="/src/index.html" class="text-text-title font-bold text-title">Argo</a>
-                
+    return {
+        render: () => {
+            return `
 
-               <div class="flex-grow flex justify-center">
-                    <form class="w-full max-w-2xl">
-                        <div class="flex">
+            <script src="/node_modules/feather-icons/dist/feather.js"></script>
+                  <nav class="bg-nav-bar flex justify-between p-4 items-center">
+                <a href="/src/index.html" class="text-text-title font-bold text-title"></a>
+
+               <div class="flex-grow flex justify-start">
+                    <form class="w-2 flex-grow">
+                        <div class="flex w-2">
                             <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label>
-                            <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button"> <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg></button>
                             <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
@@ -53,24 +68,9 @@ export default function NavBar () {
                 </div>
 
 
-                <div class="flex space-x-4">
-                   <button
-                    class="bg-button-transparent text-button-text-golden font-bold py-button-y px-button-x rounded-button hover:text-button-text-hover-golden"
-                    onclick="(${handleSignUpClick})()"
-                    >
-                   Sign up
-                   </button>
-                   <button
-                    class="bg-button-transparent text-button-text-golden font-bold py-button-y px-button-x rounded-button hover:text-button-text-hover-golden"
-                    onclick="(${handleLoginClick})()"
-                    >                   
-                   Log in
-                   </button>
-                </div>
+                <ion-icon name="menu-outline" size="large" class="text-white"></ion-icon>
              </nav>
-          `;
+            `;
+        }
     }
- 
-    }
- }
- 
+}   
