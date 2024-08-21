@@ -8,7 +8,7 @@ export default function NavBarMobile() {
 
     //function to handle the login button click
     function handleLoginClick(){
-        window.location.href = '/src/pages/login.html';
+        window.location.href = '/src/pages/login.php';
     }
     function handleSignUpClick(){
         window.location.href = '/src/pages/signUp.html';
