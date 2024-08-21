@@ -1,12 +1,19 @@
 <?php
 
-if($_POST){
+if ($_POST) {
 //get the username and password from the post request
 $username = $_POST['username'];
 $password = $_POST['password'];
+$email = $_POST['email'];
 
 echo "Username: $username <br>";
 echo "Password: $password <br>";
+echo "Email: $email <br>";
+
+
+//for testing purposes, we call the register function from the file sql.php in the utility folder
+require_once('../utility/sql.php');
+Register($username, $password, $email);
 }
 ?>
 

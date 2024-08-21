@@ -1,7 +1,6 @@
 //login form component
 export default function LoginForm() {
     
-    
     return {
         render: () => {
             function handlePassword(value){
@@ -29,10 +28,27 @@ export default function LoginForm() {
                 }
             }
 
+          
             
 
             return `
-                <form class="bg-form-background shadow-md p-form-x rounded-form ">
+                <form class="bg-form-background shadow-md p-form-x rounded-form justify-center items-center"
+                action="/CAPA_INTERMEDIA/src/pages/login.php"
+                method="POST"
+                >
+                    <div class="mb-4">
+                        <label class="block text-slate-300 text-sm font-bold mb-2 opacity-95" for="email">
+                            Email
+                        </label>
+                        <input 
+                        class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="email" 
+                        type="email" 
+                        placeholder="Email"
+                        name = "email"
+                        required
+                        >
+                    </div>
                     <div class="mb-4">
                         <label class="block text-slate-300 text-sm font-bold mb-2 opacity-95" for="username">
                             Username
@@ -42,6 +58,7 @@ export default function LoginForm() {
                         id="username" 
                         type="text" 
                         placeholder="Username"
+                        name = "username"
                         required
                         >
                     </div>
@@ -55,12 +72,15 @@ export default function LoginForm() {
                         type="password"
                         placeholder="******************"
                         oninput="(${handlePassword})(this.value)"
+                        name = "password"
                         required
                             >
                         
                     </div>
                     <div class="flex items-center justify-between">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50" type="button">
+                        <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50"
+                        type="submit"
+                        >
                             Sign In
                         </button>
                         <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 transition-colors duration-50" href="#">
