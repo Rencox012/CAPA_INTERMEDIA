@@ -1,17 +1,14 @@
 //Nav bar component for mobile devices, adding a side menu for navigation.
 
-    //import the feather javascript file from node_modules\feather-icons\dist\feather.js
-
-
 
 export default function NavBarMobile() {
 
     //function to handle the login button click
     function handleLoginClick(){
-        window.location.href = '/src/pages/login.php';
+        window.location.href = '/CAPA_INTERMEDIA/src/pages/login.php';
     }
     function handleSignUpClick(){
-        window.location.href = '/src/pages/signUp.html';
+        window.location.href = '/CAPA_INTERMEDIA/src/pages/signUp.php';
     }
     //function that handles the hiding and showing of the side menu
     function handleSideMenuClick(){
@@ -25,6 +22,22 @@ export default function NavBarMobile() {
 
     return {
         render: () => {
+
+            //check if we are in the login or signUp page, if we are, hide the search bar
+            let path = window.location.pathname;
+            let isLoginPage = path.includes('login.php');
+            let isSignUpPage = path.includes('signUp.php');
+            if(isLoginPage || isSignUpPage){
+                return `
+
+            <script src="/node_modules/feather-icons/dist/feather.js"></script>
+                  <nav class="bg-nav-bar flex justify-between p-4 items-center">
+                <a href="/src/index.html" class="text-text-title font-bold text-title"></a>
+
+                <ion-icon name="menu-outline" size="large" class="text-white"></ion-icon>
+             </nav>
+            } `
+            }
             return `
 
             <script src="/node_modules/feather-icons/dist/feather.js"></script>

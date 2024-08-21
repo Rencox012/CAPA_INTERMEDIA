@@ -1,5 +1,5 @@
 //login form component
-export default function LoginForm() {
+export default function SignUp() {
     
     return {
         render: () => {
@@ -33,7 +33,7 @@ export default function LoginForm() {
 
             return `
                 <form class="bg-form-background shadow-md p-form-x rounded-form justify-center items-center"
-                action="/CAPA_INTERMEDIA/src/pages/login.php"
+                action="/CAPA_INTERMEDIA/src/pages/signUp.php"
                 method="POST"
                 >
                     <div class="mb-4">
@@ -46,6 +46,19 @@ export default function LoginForm() {
                         type="email" 
                         placeholder="Email"
                         name = "email"
+                        required
+                        >
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-slate-300 text-sm font-bold mb-2 opacity-95" for="username">
+                            Username
+                        </label>
+                        <input 
+                        class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="username" 
+                        type="text" 
+                        placeholder="Username"
+                        name = "username"
                         required
                         >
                     </div>
@@ -67,12 +80,10 @@ export default function LoginForm() {
                     <div class="flex items-center justify-between">
                         <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50"
                         type="submit"
-                        value = "Log in"
+                        value="Sign Up"
                         >
-                        </button>
-                        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 transition-colors duration-50" href="#">
-                            Forgot Password?
-                        </a>
+                        </input>
+                    
                     </div>
                 </form>
             `;

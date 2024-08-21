@@ -13,7 +13,6 @@ function connect (){
         $conn = new PDO("mysql:host=localhost;dbname=$db_name", $db_user, $db_pass);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connected successfully";
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
@@ -38,6 +37,26 @@ function Register($username, $password, $email){
         echo $sql . "<br>" . $e->getMessage();
     }
     close_connection();
+}
+
+function Login($email, $password){
+    //connect using the connection function
+    $conn = connect();
+    //select the user from the database
+    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
+    echo "User found: " . count($result) . "<br>";
+    //if the user is found, return the user
+    if (count($result) > 0){
+        close_connection();
+        return $result[0];
+    }
+    //if the user is not found, return null
+    close_connection();
+    return null;
 }
 
 ?>

@@ -1,36 +1,31 @@
 <?php
-if($_POST){
-    //get the username and password from the post request
-    $password = $_POST['password'];
-    $email = $_POST['email'];
 
-    echo "Password: $password <br>";
-    echo "Email: $email <br>";
+if ($_POST) {
+//get the username and password from the post request
+$username = $_POST['username'];
+$password = $_POST['password'];
+$email = $_POST['email'];
 
-    //call the login function from the file sql.php in the utility folder, it will return the user if it exists
-    require_once('../utility/sql.php');
-    $user = Login($email, $password);
-    if ($user){
-        echo "User found!";
-        
-    }
-    else{
-        echo "User not found!";
-    }
+echo "Username: $username <br>";
+echo "Password: $password <br>";
+echo "Email: $email <br>";
+
+
+//for testing purposes, we call the register function from the file sql.php in the utility folder
+require_once('../utility/sql.php');
+Register($username, $password, $email);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign up</title>
     <link href="../output.css" rel="stylesheet">
 </head>
 <body class="bg-page-background">
-<script src="https://unpkg.com/feather-icons"></script>
-    <div id="navbar-container"></div>
+<div id="navbar-container"></div>
     <script type="module">
         import NavBar from "../components/ui/NavBarLanding.js";
         import NavBarMobile from "../components/ui/NavBarLanding-Mobile.js";
@@ -48,10 +43,9 @@ if($_POST){
             navbarContainer.innerHTML = navbar;
         }
     </script>
-
-    <div id="form-container" class="flex justify-center items-center m-2"></div>
+      <div id="form-container" class="flex justify-center items-center m-2"></div>
     <script type = "module">
-        import LoginForm from "../components/ui/LoginForm.js";
+        import LoginForm from "../components/ui/SignUpForm.js";
         const formContainer = document.getElementById('form-container');
         const form = LoginForm().render();
         formContainer.innerHTML = form;
