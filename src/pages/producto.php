@@ -70,7 +70,7 @@
     </main>
 
     <script type="module">
-    import {assignFunctions} from "./components/ui/NavBarLanding.js";
+    import {assignFunctions} from "../components/ui/NavBarLanding.js";
     // Cuando el documento cargue, asigna las funciones a los botones
     document.addEventListener('DOMContentLoaded', assignFunctions);
     </script>

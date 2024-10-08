@@ -40,7 +40,13 @@ export function assignFunctions(){
 
 export default function Producto() {
     return {
-        render: (name, video, images, price, rating, descripcion, reviewNumber, seller, sellerID) => {
+        render: (name, video, images, price, rating, descripcion, reviewNumber, seller, sellerID, tipo) => {
+
+            //Segun el tipo de producto, se mostrará el precio y el boton de comprar, o se mostrará que es un servicio y un boton de contactar al vendedor
+            const tipoProducto = tipo === "Producto" ? `<span class="text-green font-bold text-lg">$${price} MXN</span>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2">Añadir al carrito</button>` :
+            `<span class="text-green font-bold text-lg">Servicio</span><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2" id=${sellerID}>Contactar al vendedor</button>`;
+
             return `
             <div class="w-11/12 h-10/12 bg-white rounded-lg shadow-lg p-4">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -87,8 +93,7 @@ export default function Producto() {
                                 </div>
                             </div>
                             <div class="flex flex-col items-center mt-4">
-                                <span class="text-green font-bold text-lg">$${price} MXN</span>
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2">Añadir al carrito</button>
+                                ${tipoProducto}
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,16 @@
-2024-10-07 11:40:57pm
-Name: Julian
-Apellidos: Perez Alvarado
-Genero: Hombre
-Direccion: Calle calle 222
-Password: Pa$$word40
-Email: Julia@gmail.com
-Rol: Comprador
+2024-10-08 10:08:53pm
+Response in json: Array
+Response in string: 
+2024-10-08 10:08:53pm
+Result: {"id":"2BM45951B02294903","status":"CREATED","links":[{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2BM45951B02294903","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/checkoutnow?token=2BM45951B02294903","rel":"approve","method":"GET"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2BM45951B02294903","rel":"update","method":"PATCH"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2BM45951B02294903/capture","rel":"capture","method":"POST"}]}
+2024-10-08 10:10:53pm
+Response: {"id":"2YK82077F32857335","status":"CREATED","links":[{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2YK82077F32857335","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/checkoutnow?token=2YK82077F32857335","rel":"approve","method":"GET"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2YK82077F32857335","rel":"update","method":"PATCH"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2YK82077F32857335/capture","rel":"capture","method":"POST"}]}
+2024-10-08 10:10:53pm
+Result before Handling the result: {"id":"2YK82077F32857335","status":"CREATED","links":[{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2YK82077F32857335","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/checkoutnow?token=2YK82077F32857335","rel":"approve","method":"GET"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2YK82077F32857335","rel":"update","method":"PATCH"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/2YK82077F32857335/capture","rel":"capture","method":"POST"}]}
+Result after Handling the result: Array
+2024-10-08 10:13:17pm
+Result before Handling the result: {"id":"13B01163Y0650303V","status":"CREATED","links":[{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/13B01163Y0650303V","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/checkoutnow?token=13B01163Y0650303V","rel":"approve","method":"GET"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/13B01163Y0650303V","rel":"update","method":"PATCH"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/13B01163Y0650303V/capture","rel":"capture","method":"POST"}]}
+Result after Handling the result: {"jsonResponse":{"id":"13B01163Y0650303V","status":"CREATED","links":[{"href":"https:\/\/api.sandbox.paypal.com\/v2\/checkout\/orders\/13B01163Y0650303V","rel":"self","method":"GET"},{"href":"https:\/\/www.sandbox.paypal.com\/checkoutnow?token=13B01163Y0650303V","rel":"approve","method":"GET"},{"href":"https:\/\/api.sandbox.paypal.com\/v2\/checkout\/orders\/13B01163Y0650303V","rel":"update","method":"PATCH"},{"href":"https:\/\/api.sandbox.paypal.com\/v2\/checkout\/orders\/13B01163Y0650303V\/capture","rel":"capture","method":"POST"}]},"httpStatusCode":201}
+2024-10-08 10:15:32pm
+Result before Handling the result: {"id":"5AA720841N442121R","status":"CREATED","links":[{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/5AA720841N442121R","rel":"self","method":"GET"},{"href":"https://www.sandbox.paypal.com/checkoutnow?token=5AA720841N442121R","rel":"approve","method":"GET"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/5AA720841N442121R","rel":"update","method":"PATCH"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/5AA720841N442121R/capture","rel":"capture","method":"POST"}]}
+Result after Handling the result: {"jsonResponse":{"id":"5AA720841N442121R","status":"CREATED","links":[{"href":"https:\/\/api.sandbox.paypal.com\/v2\/checkout\/orders\/5AA720841N442121R","rel":"self","method":"GET"},{"href":"https:\/\/www.sandbox.paypal.com\/checkoutnow?token=5AA720841N442121R","rel":"approve","method":"GET"},{"href":"https:\/\/api.sandbox.paypal.com\/v2\/checkout\/orders\/5AA720841N442121R","rel":"update","method":"PATCH"},{"href":"https:\/\/api.sandbox.paypal.com\/v2\/checkout\/orders\/5AA720841N442121R\/capture","rel":"capture","method":"POST"}]},"httpStatusCode":201}

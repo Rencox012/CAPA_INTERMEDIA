@@ -36,7 +36,7 @@ export default function DisplayProducto() {
                 return image.Archivo;
             }
             );
-            return Producto().render(ProductInfo.Nombre_Producto, video.Archivo, ImagesFinal, ProductInfo.Precio, ProductInfo.Promedio_Calificacion, ProductInfo.Descripcion, ProductInfo.Total_Reviews, ProductInfo.Nombre_Vendedor, ProductInfo.ID_Vendedor);
+            return Producto().render(ProductInfo.Nombre_Producto, video.Archivo, ImagesFinal, ProductInfo.Precio, ProductInfo.Promedio_Calificacion, ProductInfo.Descripcion, ProductInfo.Total_Reviews, ProductInfo.Nombre_Vendedor, ProductInfo.ID_Vendedor, ProductInfo.Tipo);
         }
     }
 

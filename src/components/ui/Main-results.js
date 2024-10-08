@@ -21,7 +21,8 @@ export default function MainResults() {
             const response = await obtainAllCards(page);
             // create the cards
             const tarjetas = response.map((card) => {
-                return CardWrapper().render(card.NombreProducto, card.Calificacion, card.Precio, card.Portada, card.NombreVendedor, card.IDProducto);
+                console.log("CARD: ", card);
+                return CardWrapper().render(card.NombreProducto, card.Calificacion, card.Precio, card.Portada, card.NombreVendedor, card.IDProducto, card.Tipo);
             }).join('\n');
 
             return `

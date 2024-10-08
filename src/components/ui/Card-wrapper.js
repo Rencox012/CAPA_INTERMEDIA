@@ -3,7 +3,13 @@
 export default function CardWrapper(){
     
     return{
-        render: (name, rating, price, image, seller, id) => {
+        render: (name, rating, price, image, seller, id, tipo) => {
+
+            console.log("TIPO DE PRODUCTO: ", tipo);
+
+            //Dependiendo si el tipo de producto es servicio o producto, agregaremos un texto con el precio, o si es un servicio, indicaremos que es un servicio
+            const tipoProducto = tipo === "Producto" ? `<div class=" text-green-500 font-bold text-lg">$${price} MXN</div>` : `<div class="text-green font-bold text-lg">Servicio</div>`;
+
             return `
             <a 
             href="/CAPA_INTERMEDIA/src/pages/producto.php?id=${id}"
@@ -29,8 +35,9 @@ export default function CardWrapper(){
                         </svg>
                         ${rating} / 5
                     </div>
-                    <div class="text-green-600 font-bold text-lg">$${price} MXN</div>
+                    ${tipoProducto}
                     </div>
+                    
                 </div>
                 </div>
             </div>
