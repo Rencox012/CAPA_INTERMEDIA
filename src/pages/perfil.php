@@ -1,4 +1,4 @@
-#TODO Hay que acabar la pagina, basandonos en las paginas anteriores, al menos el esqueleto y preparar la UI para factorizarla
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,12 +26,30 @@
         }
     </script>
 </div>
+
+    <main class="h-full">
+        <div
+        id="Perfil-display"
+        class="flex-row justify-start items-start mt-2 mr-2 ml-2 px-24 py-12 w-full h-full"
+        >
+        <script type="module">
+            import PerfilDisplay from "../components/ui/Perfil-display.js";
+            const perfilContainer = document.getElementById('Perfil-display');
+            const perfil = await PerfilDisplay().render();
+            perfilContainer.innerHTML = perfil;
+        </script>
+        </div>
+    </main>
     
 
 
 <script type="module">
-    import {assignFunctions} from "./components/ui/NavBarLanding.js";
+    import {assignFunctions} from "../components/ui/NavBarLanding.js";
     // Cuando el documento cargue, asigna las funciones a los botones
+    document.addEventListener('DOMContentLoaded', assignFunctions);
+</script>
+<script type="module">
+    import {assignFunctions} from "../components/ui/Perfil-display.js"
     document.addEventListener('DOMContentLoaded', assignFunctions);
 </script>
 </body>
