@@ -8,9 +8,7 @@ function handleImageChange(){
     const videoDisplay = document.getElementById('video');
     const images = document.querySelectorAll('#product-img');
     const videoButton = document.getElementById('Video-Button');
-
-  
-
+    
     videoButton.addEventListener('click', () => {
         console.log ("video button clicked");
         videoDisplay.classList.remove('hidden');
@@ -84,7 +82,7 @@ export default function Producto() {
                                         </button>
                                         ${images.map((image, index) => `<img class="w-1/4 h-20 object-contain object-center rounded-lg hover:scale-105 transition-all hover:cursor-pointer"
                                             src="data:image/png;base64,${image}"
-                                             alt="${name}" id="product-img" />`).join('')}
+                                            alt="${name}" id="product-img" />`).join('')}
                                     </div>
                                 </div>
                             </div>

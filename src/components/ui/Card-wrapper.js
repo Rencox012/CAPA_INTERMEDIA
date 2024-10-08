@@ -7,7 +7,7 @@ export default function CardWrapper(){
             return `
             <a 
             href="/CAPA_INTERMEDIA/src/pages/producto.php?id=${id}"
-             class="card-container mt-4 w-full sm:w-6/12 md:w-4/12 lg:w-2/12 min-h-96 max-h-[408px] p-2"
+            class="card-container mt-4 w-full sm:w-6/12 md:w-4/12 lg:w-2/12 min-h-96 max-h-[408px] p-2"
             id = "${id}"
             >
             <div class="mt-4 w-full h-full hover:scale-105 transition-all ">

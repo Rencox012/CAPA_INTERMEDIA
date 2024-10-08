@@ -9,10 +9,18 @@ export function handleEndSession(){
     User.clear();
 }
 
+function handleSendToProfile(){
+    //get the user ID from the local storage
+    const id = User.GetUID();
+    //when the user clicks the profile button, it will redirect to the profile page
+    window.location.href = '/CAPA_INTERMEDIA/src/pages/perfil.php?id='+id;
+}
+
 export function assignFunctions()
 {
     //assign the functions to the buttons
     document.getElementById('logout-button').addEventListener('click', handleEndSession);
+    document.getElementById('profile').addEventListener('click', handleSendToProfile);
 
 }
 
@@ -32,13 +40,10 @@ export default function NavBar () {
     render: () => {  
     //function to handle the dropdown selection
     function handleDropDownSelection (e){
-
         let button = document.getElementById('dropdown-button');
         button.value = e.target.value;
         //change the span value to the selected value
         document.getElementById('DropValue').textContent = e.target.value;
-    
-
         
     }
 
@@ -113,6 +118,16 @@ export default function NavBar () {
                     Profile
                     </button>
                 </li>
+                <li>
+                    <button
+                    tupe="button"
+                    class="inline-flex w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:rounded-lg"
+                    value = "Messages"
+                    onclick="(${handleDropDownSelection})(event)"
+                    id = "messages"
+                    >
+                    Messages
+                    </button>
                 <li>
                     <button 
                     type="button" 

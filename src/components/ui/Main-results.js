@@ -26,9 +26,6 @@ export default function MainResults() {
 
             return `
                 <div class="w-full p-4">
-                    <div class="flex items-center mt-4">
-                        <h2 class="text-2xl font-semibold">Cursos</h2>
-                    </div>
                     <div class="flex flex-wrap gap-8 justify-center">
                         ${tarjetas}
                     </div>
