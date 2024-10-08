@@ -1,0 +1,114 @@
+body {
+  /*background-color: #b5838d;*/
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 400px;
+    background-color: #545974; 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(46, 63, 114);
+}
+
+.login-form {
+    display: block;
+}
+
+.signup-form {
+    display: none;
+}
+
+label {
+    color: #ffffff; /* Cambia el color del texto arriba de los campos */
+    font-size: 14px; /* Tamaño de fuente */
+    margin-bottom: 8px; /* Espacio entre el texto y el campo */
+    display: block; /* Hace que cada etiqueta se muestre en una línea separada */
+}
+
+h2 {
+    color: #ffffff; /* Color cyan */
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+button {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 13px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #322b85; /* Color rosa profundo */
+    color: white;
+    cursor: pointer;
+}
+
+.signup-link {
+    color: #7095da; /* Color rosa claro */
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+.login-link {
+    color: #7095da; /* Color rosa claro */
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+/*COMMBOBOX*/
+label {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #dcdcdc;
+    margin-right: 10px;
+}
+
+select {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    border: 2px solid #76b3fa;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f5f7fa, #7095da);
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    border-color: #5a9af7;
+    background: linear-gradient(135deg, #d6e0f0, #adc7e4);
+}
+
+select:focus {
+    border-color: #4285f4;
+    background: linear-gradient(135deg, #e1ebf8, #b3d4f7);
+}
+
+option {
+    background-color: #fff;
+    color: #333;
+}

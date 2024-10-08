@@ -1,13 +1,38 @@
 //login form component
+import api from "../../api/api.js"
+
+
+export function handleEmailVerif(){
+    const email = document.getElementById('email').value;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if(!emailRegex.test(email)){
+        document.getElementById('email').setCustomValidity('Please enter a valid email');
+        if(!document.getElementById('warning-email')){
+            const warning = document.createElement('p');
+            warning.id = 'warning-email';
+            warning.textContent = 'Please enter a valid email.';
+            warning.classList.add('text-red-500', 'text-xs', 'italic');
+            document.getElementById('email').insertAdjacentElement('afterend', warning);
+            return false;
+        }
+    }
+    else{
+        if(document.getElementById('warning-email')){
+            document.getElementById('warning-email').remove();
+        }
+        document.getElementById('email').setCustomValidity('');
+        return true;
+    }
+}
+
 export default function LoginForm() {
+    
     
     return {
         render: () => {
             function handlePassword(value){
                 //validate the password
                 if(value === ''){
-                    //if the password is empty, it will display a message
-                    console.log('Please enter a password');
                     document.getElementById('password').setCustomValidity('Please enter a password');
                     //if the message with id warning does not exist in the document, it will create a new message
                     if(!document.getElementById('warning')){
@@ -29,15 +54,13 @@ export default function LoginForm() {
             }
 
 
-            
-
             return `
-                <form class="bg-form-background shadow-md p-form-x rounded-form justify-center items-center"
-                action="/CAPA_INTERMEDIA/src/pages/login.php"
+               <form class="bg-form-background shadow-md p-form-x rounded-form justify-center items-center"
+                id = "login-form"
                 method="POST"
                 >
                     <div class="mb-4">
-                        <label class="block text-slate-300 text-sm font-bold mb-2 opacity-95" for="email">
+                        <label class="block text-white text-sm font-bold mb-2 opacity-95" for="email">
                             Email
                         </label>
                         <input 
@@ -50,7 +73,7 @@ export default function LoginForm() {
                         >
                     </div>
                     <div class="mb-6">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                        <label class="block text-white text-sm font-bold mb-2" for="password">
                             Password
                         </label>
                         <input
@@ -63,6 +86,19 @@ export default function LoginForm() {
                         required
                             >
                         
+                    </div>
+
+                    <div class = "mb-6">
+                    <label for="Rol"
+                    class="block text-white text-sm font-bold mb-2"
+                    >Entrar como:</label>
+                    <select name="Rol" id="Rol"
+                    class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    >
+                        <option value="comprador">Comprador</option>
+                        <option value="vendedor">Vendedor</option>
+                        <option value="admin">Administrador</option>
+                    </select>
                     </div>
                     <div class="flex items-center justify-between">
                         <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50"
@@ -80,4 +116,3 @@ export default function LoginForm() {
         }
     }
 }
-

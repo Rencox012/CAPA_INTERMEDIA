@@ -1,0 +1,464 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(80, 46, 114);
+  }
+  
+  .shoppingcart img {
+    width: 50px; /* Ajusta el tamaño de la foto del usuario según sea necesario */
+    height: 50px;
+    border-radius: 50%; /* Para hacer que la foto del usuario sea redonda */
+    object-fit: cover; /* Para ajustar la imagen dentro del contenedor */
+  }
+  
+  .user img {
+    width: 50px; /* Ajusta el tamaño de la foto del usuario según sea necesario */
+    height: 50px;
+    border-radius: 50%; /* Para hacer que la foto del usuario sea redonda */
+    object-fit: cover; /* Para ajustar la imagen dentro del contenedor */
+  }
+  
+  
+  .topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
+  
+  .navigation a {
+    margin: 0 15px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .auth-buttons button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Contenedor del menú desplegable */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Botón del menú desplegable */
+  .dropbtn {
+    background-color: transparent;
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+  }
+  
+  /* Contenido del menú desplegable */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #8966ad;
+    min-width: 160px;
+    border-radius: 5%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Elementos dentro del menú desplegable */
+  .dropdown-content a {
+    color: #ffffff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Cambiar color al pasar el ratón sobre los enlaces del menú */
+  .dropdown-content a:hover {
+    background-color: #b593d0;
+  }
+  
+  /* Mostrar el menú desplegable al hacer clic */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #b593d0;
+  }
+  
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Sección de Descuentos */
+  .discount-section {
+    background-color: #d7c1f1;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .discount-content h1 {
+    font-size: 28px;
+    color: #735790;
+  }
+  
+  .discount-content p {
+    font-size: 18px;
+    color: #755790;
+  }
+  
+  /*GALERÍA*/
+  /* Contenedor principal de la galería */
+  /* Contenedor principal de la galería */
+  .gallery-container {
+    max-width: 1200px; /* Ajusta el ancho máximo según sea necesario */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 0 10px; /* Opcional: agrega padding para los bordes */
+    display: flex; /* Usa flexbox para centrar los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias filas */
+    justify-content: center; /* Centra los elementos en la fila */
+  }
+  
+  /* Estilos para cada elemento de la galería */
+  div.gallery {
+    border: 1px solid #7b5790;
+    margin: 10px; /* Espacio entre los elementos de la galería */
+  }
+  
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  div.gallery img {
+    width: 100%;
+    height: auto;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  /* Estilo para elementos con float */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Estilos para elementos responsivos */
+  .responsive {
+    width: 24.99999%; /* Ajusta el ancho según el número de columnas deseadas */
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%; /* Ajusta el ancho para pantallas más pequeñas */
+        margin: 6px 0;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%; /* Ajusta el ancho para pantallas muy pequeñas */
+    }
+  }
+  
+  
+  
+  /* Sección de Selección de Cursos */
+  .courses-section {
+    padding: 40px 20px;
+    background-color: #f7ecff;
+  }
+  
+  .courses-section h2 {
+    font-size: 24px;
+    color: #7a5790;
+    text-align: center;
+  }
+  
+  .courses-section p {
+    font-size: 16px;
+    color: #7a5790;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .courses-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .courses-nav a {
+    margin: 0 10px;
+    font-size: 14px;
+    color: #0073b1;
+    text-decoration: none;
+  }
+  
+  .courses-nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .course-highlight {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .course-highlight h3 {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .course-highlight p {
+    font-size: 16px;
+    color: #666;
+    margin: 20px 0;
+  }
+  
+  .course-highlight button {
+    padding: 12px 24px;
+    background-color: #745790;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .course-highlight button:hover {
+    background-color: #bc97d0;
+  }
+  
+  /* Estilos del Carrusel */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .course-list {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .course-item {
+    min-width: 220px;
+    margin-right: 10px;
+    flex: 0 0 auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .course-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .course-item p {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .old-price {
+    text-decoration: line-through;
+    color: #999;
+  }
+  
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 50%;
+  }
+  
+  .carousel-button.prev {
+    left: 10px;
+  }
+  
+  .carousel-button.next {
+    right: 10px;
+  }
+  
+  .carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Sección de Convertirse en Instructor */
+  .instructor-section {
+    background-color: #795790;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .instructor-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .instructor-content img {
+    width: 300px;
+    height: auto;
+    margin-right: 30px;
+    border-radius: 5px;
+    background-color: #ffeb3b;
+  }
+  
+  .instructor-text {
+    max-width: 600px;
+  }
+  
+  .instructor-text h2 {
+    font-size: 28px;
+    color: #edd7fb;
+  }
+  
+  .instructor-text p {
+    font-size: 16px;
+    color: #c9bfef;
+    margin: 20px 0;
+  }
+  
+  .instructor-text button {
+    padding: 12px 24px;
+    background-color: #4d3664;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .instructor-text button:hover {
+    background-color: #af91ca;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .footer-links div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .footer-links a:hover {
+    color: white;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+  
+  .language-selector {
+    background-color: #444;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+  }
+  
+  .language-selector:hover {
+    background-color: #555;
+  }
+  
+  .user {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .user-dropdown-toggle img {
+    width: 50px; /* Ajusta el tamaño de la foto del usuario según sea necesario */
+    height: 50px;
+    border-radius: 50%; /* Para hacer que la foto del usuario sea redonda */
+    object-fit: cover; /* Para ajustar la imagen dentro del contenedor */
+    cursor: pointer;
+  }
+  
+  /* Contenedor del menú desplegable */
+  .user-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+  
+  /* Elementos dentro del menú desplegable */
+  .user-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+  }
+  
+  /* Cambiar color al pasar el ratón sobre los enlaces del menú */
+  .user-dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Mostrar el menú desplegable al hacer clic */
+  .user:hover .user-dropdown-content {
+    display: block;
+  }

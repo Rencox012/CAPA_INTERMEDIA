@@ -1,21 +1,4 @@
-<?php
 
-if ($_POST) {
-//get the username and password from the post request
-$username = $_POST['username'];
-$password = $_POST['password'];
-$email = $_POST['email'];
-
-echo "Username: $username <br>";
-echo "Password: $password <br>";
-echo "Email: $email <br>";
-
-
-//for testing purposes, we call the register function from the file sql.php in the utility folder
-require_once('../utility/sql.php');
-Register($username, $password, $email);
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +6,7 @@ Register($username, $password, $email);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
     <link href="../output.css" rel="stylesheet">
+    <script src="../jquery/jquery.js"></script>
 </head>
 <body class="bg-page-background">
 <div id="navbar-container"></div>
@@ -51,7 +35,44 @@ Register($username, $password, $email);
         formContainer.innerHTML = form;
     </script>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script type="module">
+    import api from "../api/api.js";
+
+    $(document).ready(function(){
+        $("#sign-up-form").submit(async function(event){     
+            event.preventDefault();
+
+            let file = $("#profile-picture").prop('files')[0];
+            let name = $("#name").val();
+            let apellidos = $("#apellidos").val();
+            let sex = $("#Sex").val();
+            let email = $("#email").val();
+            let direccion = $("#direccion").val();
+            let password = $("#password").val();
+            let role = $("#Role").val();
+            
+            // Call the login function
+           await api.users.register(file, name, apellidos, sex, direccion,  email, password, role).then((response) => {
+                // Parse the JSON from the response
+                console.log(response);
+                if (!response.ok) {
+                    alert("User not created");
+                    throw new Error("HTTP error " + response.status + "JSON returned: " + response.json());
+                }
+                else{
+                    return response.json();
+                }
+            }).then((data) => {
+                // If the user is found, redirect to the dashboard
+                console.log(data);
+                alert ("User created successfully");
+                window.location.href = "../index.php";
+            }).catch((error) => {
+                console.log(error);
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -31,10 +31,23 @@
         }
        
     </script>
+<div id = "main-productos">
+    <div id="results" class="w-full">
+      <script type="module">
+        import MainResults from "./components/ui/Main-results.js";
+        const resultsContainer = document.getElementById('results');
+        const results = await MainResults().render();
+        resultsContainer.innerHTML = results;
+      </script>
+    </div>
+</div>
      
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<script type="module">
+    import {assignFunctions} from "./components/ui/NavBarLanding.js";
+    // Cuando el documento cargue, asigna las funciones a los botones
+    document.addEventListener('DOMContentLoaded', assignFunctions);
+</script>
+
 </body>
 </html>

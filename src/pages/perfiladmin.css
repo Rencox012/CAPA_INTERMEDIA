@@ -1,0 +1,831 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(80, 46, 114);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  
+  .user img {
+    width: 50px; /* Ajusta el tamaño de la foto del usuario según sea necesario */
+    height: 50px;
+    border-radius: 50%; /* Para hacer que la foto del usuario sea redonda */
+    object-fit: cover; /* Para ajustar la imagen dentro del contenedor */
+    margin-left: 45px;  
+}
+
+.user-header img {
+  width: 50px; /* Ajusta el tamaño de la foto del usuario según sea necesario */
+  height: 50px;
+  border-radius: 50%; /* Para hacer que la foto del usuario sea redonda */
+  object-fit: cover; /* Para ajustar la imagen dentro del contenedor */
+  margin-left: 1150px;  
+}
+
+.home img {
+  margin-left: 10px; /* Añade un margen a la izquierda de la imagen de inicio */
+  width: 50px;
+    height: 50px;
+}
+  
+  .user-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+  
+  /* Elementos dentro del menú desplegable */
+  .user-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+  }
+  
+  /* Cambiar color al pasar el ratón sobre los enlaces del menú */
+  .user-dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Mostrar el menú desplegable al hacer clic */
+  .user:hover .user-dropdown-content {
+    display: block;
+  }
+
+  /* Estilos de la sidebar */
+  .sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 60px; /* Ajustar debajo del header */
+    left: 0;
+    background-color: #333;
+    padding-top: 20px;
+  }
+  
+  .sidebar-link {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar-link:hover {
+    background-color: #575757;
+  }
+  
+  /* Estilos del contenido */
+  .content {
+    margin-left: 210px; /* Espacio para la sidebar */
+    padding: 80px 20px; /* Espacio para el header */
+  }
+  
+  .window {
+    display: none;
+  }
+  
+  .window.active {
+    display: block;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+
+/* Estilos de la sidebar */
+.sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #8966ad;
+    padding-top: 20px;
+  }
+  
+  .sidebar-link {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar-link:hover {
+    background-color: #c2a1e3;
+  }
+  
+  /* Estilos del contenido */
+  .content {
+    margin-left: 210px; /* Espacio para la sidebar */
+    padding: 20px;
+  }
+  
+  .window {
+    display: none;
+  }
+  
+  .window.active {
+    display: block;
+  }
+  
+  h1 {
+    margin-top: 0;
+    color:white;
+  }
+  
+  
+
+
+/*CURSOS*/
+.gallery-container {
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  padding: 0 10px; /* Opcional: agrega padding para los bordes */
+  display: flex; /* Usa flexbox para centrar los elementos */
+  max-width: 100%; /* Aumenta el ancho máximo para abarcar más pantalla */
+  padding: 0 20px; /* Ajusta el padding para un poco más de espacio en los bordes */
+  flex-wrap: wrap;
+  justify-content: space-around; /* Distribuye los elementos de manera uniforme */
+  margin-top: 60px;
+}
+/* Estilos para cada elemento de la galería */
+div.gallery {
+    border: 1px solid #ccc;
+    margin: 10px; /* Espacio entre los elementos de la galería */
+  }
+  
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  div.gallery img {
+    width: 100%;
+    height: auto;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  /* Estilo para elementos con float */
+  * {
+    box-sizing: border-box;
+  }
+  
+  .responsive {
+    width: 32.99999%; /* Ancho mayor para que los elementos de la galería se vean más grandes */
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%; /* Ajusta el ancho para pantallas más pequeñas */
+        margin: 6px 0;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%; /* Ajusta el ancho para pantallas muy pequeñas */
+    }
+  }
+
+  /* Título más arriba */
+.cursos-title {
+    margin-top: 0px; /* Ajusta el margen superior según sea necesario */
+    font-size: 28px;
+    text-align: left;
+    margin-left: 10px;
+  }
+  
+  /* Dropdown oculto por defecto */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Estilos de los enlaces en el dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Cambiar el color cuando se pasa el mouse sobre los enlaces */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Mostrar el dropdown al hacer clic */
+  .show-dropdown .dropdown-content {
+    display: block;
+  }
+
+  /* Estilo básico para el combobox */
+  .custom-select-container {
+    position: relative;
+     /* Ajusta el ancho al 100% del contenedor */
+    width: 1200px; /* Establece un ancho máximo */
+    display: flex; /* Hace que los elementos hijos se alineen horizontalmente */
+    align-items: center;
+    transform: translateY(10px);
+  }
+
+  .custom-select-container img {
+    margin-right: 15px; /* Añade espacio entre la imagen y el combobox */
+    width: 800px; /* Ajusta el tamaño de la imagen si es necesario */
+    height: auto;
+  }
+
+  .rect-container {
+  border: 2px solid #000; /* Borde del rectángulo */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  background-color: #f0f0f0; /* Color de fondo del rectángulo */
+  display: inline-block; /* Asegura que el contenedor no ocupe toda la fila */
+  transform: translateY(-140px); /* Desplaza el rectángulo hacia arriba */
+}
+  
+  .custom-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+    transform: translateY(-168px);
+    z-index: 100; /* Asegura que esté encima de otros elementos dentro de su contenedor */
+  }
+  
+  .selected-option {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .custom-options {
+    display: none;
+    position: absolute;
+    top: 100%; /* Ubica el menú justo debajo del contenedor */
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    background-color: #f9f9f9;
+    z-index: 1000; /* Asegura que el menú esté encima del contenido subyacente */
+  }
+  
+  .option-group {
+    border-top: 1px solid #ddd;
+  }
+  
+  .group-label {
+    padding: 5px 10px;
+    background-color: #e0e0e0;
+    font-weight: bold;
+  }
+  
+  .option {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .option:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .custom-select.active .custom-options {
+    display: block;
+  }
+  
+  /* Estilo responsivo para pantallas pequeñas */
+  @media (max-width: 1225px) {
+    .custom-select-container {
+      width: 800px;
+    }
+  
+    .custom-options {
+      position: static; /* Hace que el menú se posicione en el flujo normal del documento */
+      width: 100%; /* Asegura que el menú se ajuste al ancho del contenedor */
+      z-index: 100; /* Asegura que el menú no se superponga a otros elementos importantes */
+    }
+  }
+  
+  .contenido-ajustado {
+    margin-top: 150px; /* Ajusta este valor según el tamaño de tu header */
+  }
+
+  /*DROPDOWN CONTENT REPORTAR*/
+  .dropdown-content-reportar {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    padding: 10px;
+    right: 0; /* Alinea el dropdown con el borde derecho */
+  }
+  
+  /* Estilo de los enlaces en el dropdown */
+  .dropdown-content-reportar a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Cambia el color cuando se pasa el mouse por encima */
+  .dropdown-content-reportar a:hover {
+    background-color: #ddd;
+  }
+
+  /*INFO PERSONAL*/
+  /* Estilos para el contenedor del formulario */
+  .form-container {
+    width: 1000px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para cada grupo de formulario */
+  .form-container form {
+    display: flex;
+    flex-direction: column; /* Disposición vertical */
+  }
+  
+  .form-container label {
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el campo */
+    font-weight: bold; /* Hacer la etiqueta más destacada */
+  }
+  
+  /* Estilo para los campos de entrada */
+  .form-container input,
+  .form-container select,
+  .form-container textarea {
+    width: 100%; /* El campo ocupa el 100% del ancho del contenedor */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    margin-bottom: 15px; /* Espacio entre los campos */
+  }
+  
+  /* Estilo para el botón de enviar */
+  .form-container button {
+    background-color: #664389;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Espacio arriba del botón */
+  }
+  
+  .form-container button:hover {
+    background-color: #8966ad;
+  }
+  
+  /* Estilo para separar campos en líneas distintas */
+  .form-container input[type="date"] {
+    margin-bottom: 15px;
+  }
+  
+  /*CERTIFICADO*/
+  /* Estilo básico para el combobox con imágenes */
+  .custom-select-imagenes {
+    position: relative;
+    display: block; /* Cambiado a block para que cada combobox ocupe una línea completa */
+    margin-bottom: 20px; /* Espaciado entre los comboboxes */
+    width: 1245px; /* Ajusta el ancho según tus necesidades */
+    top: -200px; /* Ajustado para evitar la superposición con el sidebar */
+  }
+  
+  .select-imagenes-selected {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 8px;
+    cursor: pointer;
+    width: 100%; /* Asegura que el ancho del combobox ocupe todo el ancho disponible */
+    box-sizing: border-box; /* Incluye el padding y border en el ancho total */
+  }
+  
+  .select-imagenes-items {
+    position: absolute;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    width: 100%; /* Asegura que el menú desplegable tenga el mismo ancho que el combobox */
+    box-sizing: border-box; /* Incluye el padding y border en el ancho total */
+  }
+  
+  .select-imagenes-items div {
+    padding: 8px;
+    cursor: pointer;
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+  }
+  
+  .select-imagenes-items div img {
+    width: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  
+  .select-imagenes-items div:hover {
+    background-color: #ddd;
+  }
+  
+  /* Ajustes para pantallas más pequeñas */
+  @media (max-width: 1225px) {
+    .custom-select-imagenes {
+        width: 100%; /* Ajusta el ancho al 100% del contenedor */
+        top: -8; /* Reajustado para evitar la superposición con el sidebar */
+    }
+  
+    .select-imagenes-items {
+        position: static; /* Hace que el menú se posicione en el flujo normal del documento */
+        width: 100%; /* Asegura que el menú se ajuste al ancho del contenedor */
+    }
+  }
+
+/*MENSAJES*/
+*{
+  margin:0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing:border-box;
+}
+
+.chat-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar2 {
+  width: 30%;
+  background-color: #202c33;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar2-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #2a3942;
+}
+
+.user-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.chat-list {
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #404c53;
+  cursor: pointer;
+}
+
+.chat-item:hover {
+  background-color: #2a3942;
+}
+
+.chat-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-info {
+  flex-grow: 1;
+}
+
+.chat-time {
+  color: #a3a3a3;
+  font-size: 12px;
+}
+
+.chat-window {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  width: 800px;
+  height: 630px;
+}
+
+.chat-header {
+  padding: 15px;
+  background-color: #2a3942;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-body {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  background-color: #eaeaea;
+}
+
+.chat-footer input {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.chat-footer button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #00bfa5;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body{
+  background-image: url('https://i.pinimg.com/originals/b1/fa/4b/b1fa4beeb4d633f2d43eeb18b08aa222.gif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height:100vh;
+  background-color: #e5cbff;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.container{
+  width:1210px;
+  height:80vh;
+  display:flex;
+  flex-direction:column;
+  box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
+  background-color: dodgerblue;
+}
+
+.header-content {
+  display: flex;
+  align-items: center; /* Alinea verticalmente la imagen y el texto */
+}
+
+.header img {
+  width: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 50px;
+  border-radius: 50%; /* Mantén la imagen redonda */
+  object-fit: cover; /* Asegura que la imagen se ajuste dentro del contenedor */
+  margin-right: 15px; /* Espacio entre la imagen y el texto */
+}
+
+.header h1{
+  color:white;
+}
+
+.body{
+  flex:1;
+  color:white;
+  background-color:rgba(0,0,0,0.7);
+  padding: 20px 30px;
+}
+
+.message{
+  background-color: dodgerblue;
+  padding:10px;
+  color:white;
+  width:fit-content;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.user_message{
+  margin-left:auto;
+  background-color: rgb(125, 242, 137);
+  color:black;
+}
+
+.footer form{
+  display:flex;
+}
+
+form input{
+  flex:1;
+  height: 40px;
+  border:none;
+  outline:none;
+  padding-left:5px;
+  font-size: 16px;
+}
+
+form button{
+  width: 100px;
+  font-size:18px;
+  border:none;
+  outline:none;
+  background-color: dodgerblue;
+  color: white;
+  cursor:pointer;
+}
+
+form button:hover{
+  background-color:blue;
+  transition: 0.2s ease;
+}
+
+
+/*REPORTES*/
+.cart {
+    flex: 2;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: -100px;
+    width: 1150px;
+}
+
+.product-list {
+    list-style: none;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.product-info {
+    display: flex;
+    align-items: center; /* Alinea checkbox, imagen y detalles verticalmente */
+    flex-grow: 1; /* Hacer que .product-info ocupe el espacio disponible */
+    width: 100%; /* Asegurar que ocupa todo el ancho del contenedor */
+}
+
+.details {
+    width: 100%; /* Hacer que .details ocupe todo el espacio restante */
+}
+
+.product-info img {
+    width: 1000px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.details h3 {
+    font-size: 16px;
+    white-space: nowrap; /* Evitar que el texto se corte si es muy largo */
+    overflow: hidden; /* Esconder el texto que no cabe en la caja */
+    text-overflow: ellipsis; /* Añadir los puntos suspensivos si el texto es muy largo */
+}
+
+.details p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.tres-puntos {
+    margin-left: auto;
+    width: 10px;
+}
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0; /* Evitar que las acciones reduzcan su tamaño */
+}
+
+.cart-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Espacio entre el título y el contenido */
+    color: #333; /* Color del texto del título */
+}
+
+/*TABLA*/
+table {
+    border: 1px solid white;
+    border-collapse: collapse;
+    width: 1000px;
+    height: 84px;
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+  }
+  
+  td {
+    border: 1px solid white;
+    background-color: #c0a0e0;
+    padding: 8px; /* Añade un poco de espacio dentro de las celdas */
+    text-align: center; /* Centra el texto dentro de las celdas */
+    font-size: 20px; /* Ajusta el tamaño de la fuente */
+  }
+  
+  th {
+    font-weight: bold; /* Hace el texto de los encabezados más grueso */
+    border: 1px solid white;
+    background-color: #8966ad;
+    padding: 8px; /* Añade un poco de espacio dentro de las celdas */
+    text-align: center; /* Centra el texto dentro de las celdas */
+    font-size: 30px; /* Ajusta el tamaño de la fuente */
+  }
+
+  /*CATEGORIA*/
+  .containercategorianueva {
+    margin: 20px;
+    padding: 20px;
+    margin-top: -300px;
+}
+
+#newOptioncreada {
+    padding: 10px;
+    margin-right: 10px;
+    width:800px;
+}
+
+#submitBtncat {
+    padding: 10px 15px;
+    background-color: #8966ad;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#submitBtncat:hover {
+    background-color: #c5a3e8;
+}
+
+#dropdowncategorianueva {
+    margin-top: 20px;
+    padding: 10px;
+}

@@ -1,0 +1,8 @@
+2024-10-07 11:40:57pm
+Name: Julian
+Apellidos: Perez Alvarado
+Genero: Hombre
+Direccion: Calle calle 222
+Password: Pa$$word40
+Email: Julia@gmail.com
+Rol: Comprador

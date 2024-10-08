@@ -20,7 +20,7 @@ module.exports = {
         //COLOR FOR NAV BAR
         'nav-bar' : '#000000', //White color for the nav bar
         //COLOR FOR PAGE BACKGROUND
-        'page-background' : '#060608', //White color for the page background
+        'page-background' : '#08080d', //black color for the page background
         //COLOR FOR FORM BACKGROUND
         'form-background' : 'rgba(10, 94, 166, 0.26)', //White color for the form background
       },
