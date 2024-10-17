@@ -1,5 +1,9 @@
 <?php
 
+/*#TODO 
+Aun falta agregar la informacion del carrito
+*/
+
 global $client, $secret, $port,$base ;
 $client = 'ASeMX1ESeAMGZeauBcuPuLJ8elWYzxtRDTjR4sL5awWYc-y4181-qNkh9qHZDs5y2eYm9J24pzns4w0u';
 $secret = 'EBNTcXEKT2pOw-spBzj0ogzLZq8CM5w6DrorBGk-sRbwIl6N8TlBCFJnsLo8vDjXsCuvSLJABuKiDg-v';

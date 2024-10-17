@@ -1,3 +1,5 @@
+import ListasDropdown from "./ListasDropdown.js";
+import { User } from "../../utility/classes/user.js";
 //componente que muestra la información de un producto
 //tiene varias imagenes del producto, nombre, precio, rating, descripción, número de reviews, vendedor y tags
 function handleImageChange(){
@@ -40,12 +42,22 @@ export function assignFunctions(){
 
 export default function Producto() {
     return {
-        render: (name, video, images, price, rating, descripcion, reviewNumber, seller, sellerID, tipo) => {
+        render: async (name, video, images, price, rating, descripcion, reviewNumber, seller, sellerID, tipo) => {
+
+            const user = User.load();
+
+            const elementoListas = await ListasDropdown().render(user.uid);
 
             //Segun el tipo de producto, se mostrará el precio y el boton de comprar, o se mostrará que es un servicio y un boton de contactar al vendedor
             const tipoProducto = tipo === "Producto" ? `<span class="text-green font-bold text-lg">$${price} MXN</span>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2">Añadir al carrito</button>` :
             `<span class="text-green font-bold text-lg">Servicio</span><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2" id=${sellerID}>Contactar al vendedor</button>`;
+
+            const agregarLista = tipo === "Producto" ? 
+            `
+            ${elementoListas}
+            `
+            : ``;
 
             return `
             <div class="w-11/12 h-10/12 bg-white rounded-lg shadow-lg p-4">
@@ -94,6 +106,9 @@ export default function Producto() {
                             </div>
                             <div class="flex flex-col items-center mt-4">
                                 ${tipoProducto}
+                            </div>
+                            <div class="flex flex-col items-center mt-4">
+                                ${agregarLista}
                             </div>
                         </div>
                     </div>

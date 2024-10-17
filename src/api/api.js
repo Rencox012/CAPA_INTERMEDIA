@@ -89,6 +89,32 @@ const api = {
                     })
                 });
         }
+    },
+    lists:{
+        getListasUsuario: async function(id){
+            return fetch(`/CAPA_INTERMEDIA/src/server/listas.php/obtainLists?id=${id}` ,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+        },
+        createList: async function(idUsuario, name, descripcion, privacidad){
+            return fetch(`/CAPA_INTERMEDIA/src/server/listas.php/createList` ,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        idUsuario: idUsuario,
+                        nombre: name,
+                        descripcion: descripcion,
+                        privacidad: privacidad
+                    })
+                });
+        },
     }
     
 };

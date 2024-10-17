@@ -197,7 +197,75 @@ function createComment($id, $comentario, $calificacion, $idUsuario){
 }
 
 #endregion
+#region Listas
+function getListasUsuario($id){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'code' => null,
+        'errorText' => null
+    ];
+    try {
+        $conn = connect();
+        $sql = "CALL GetListasUsuario(:id)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR_CHAR);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+       //if we have a result, return it
+        if (count($result) > 0){
+            $resultado['data'] = $result;
+            $resultado['success'] = true;
+            $resultado['code'] = 200;
+        } else {
+            //if we don't have a result, return an empty array
+            $resultado['success'] = true;
+            $resultado['code'] = 201;
+            $resultado['errorText'] = 'No lists found';
+        }
+    } catch (PDOException $e) {
+        // Handle error
+        $resultado['success'] = false;
+        $resultado['code'] = 500;
+        $resultado['errorText'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    } 
+}
+function createList($id, $nombre, $descripcion, $status){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'errorCode' => null,
+        'errorText' => null
+    ];
+    try {
+        $conn = connect();
+        $sql = "CALL InsertarLista(:idUsuario, :nombre, :descripcion, :status)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idUsuario', $id, PDO::PARAM_STR_CHAR);
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR_CHAR);
+        $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR_CHAR);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR_CHAR);
+        $stmt->execute();
+
+        //if there were no mistakes, return the success message
+        $resultado['data'] = 'List created';
+
+    } catch (PDOException $e) {
+        // Handle error
+        $resultado['success'] = false;
+        $resultado['errorCode'] = 500;
+        $resultado['errorText'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    } 
+}
+#endregion
 function blobToBase64($blob){
     return base64_encode($blob);
 }
