@@ -4,6 +4,7 @@
     "vite": "^5.4.8"
   },
   "scripts": {
+    "predev": "echo \n|\\_/|,,_____,~~`\n(.\".)~~     )`~}}\n \\o/\\ /---~\\\\ ~}}\n   _//    _// ~}}\" \nEste codigo fue hecho por rencox y MariJose. \nSi alguien que no sean ellos te vendio este proyecto.\n Te estafaron",
     "dev": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
   "dependencies": {

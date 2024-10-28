@@ -184,12 +184,12 @@ export default function NavBar () {
                                 <span id="DropValue">Buyers</span>
                         </button>
                             <div id="dropdown"
-                            class="hidden absolute z-10 w-25 mt-14 origin-top-right rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
-                                <ul class="py-2 text-sm text-gray-700 dark:text-white" aria-labelledby="dropdown-button">
-                                <li>
+                            class="hidden absolute text-white z-10 w-25 mt-14 origin-top-right rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+                                <ul class="list-none py-2 text-sm text-gray-700 dark:text-white" aria-labelledby="dropdown-button">
+                                <li class="list-none">
                                     <button 
                                     type="button" 
-                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:rounded-lg"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:rounded-lg  list-none"
                                     value = "Products"
                                     onclick="(${handleDropDownSelection})(event)"
                                     id = "products"
@@ -197,16 +197,16 @@ export default function NavBar () {
                                     Products
                                     </button>
                                 </li>
-                                <li>
+                                <li class="list-none">
                                     <button 
                                     type="button" 
-                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:rounded-lg"
+                                    class="inline-flex w-full px-4 py-2 text-white hover:bg-gray-100 dark:hover:bg-gray-600  hover:rounded-lg"
                                     value = "Buyers"
                                     onclick="(${handleDropDownSelection})(event)"
                                     >Buyers
                                     </button>
                                 </li>
-                                <li>
+                                <li class="list-none">
                                     <button 
                                     type="button" 
                                     class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:rounded-lg"
@@ -215,7 +215,7 @@ export default function NavBar () {
                                     >Sellers
                                     </button>
                                 </li>
-                                <li>
+                                <li class="list-none">
                                     <button 
                                     type="button" 
                                     class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:rounded-lg"
