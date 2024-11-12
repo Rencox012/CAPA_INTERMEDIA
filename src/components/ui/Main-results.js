@@ -8,7 +8,18 @@ async function obtainAllCards (page){
         return response.json();
 
 }
-
+async function getProductoFoto(productoID){
+    const response = await api.products.getProductPicture(productoID);
+    switch (response.status){
+        case 200:
+            return await response.json();
+        case 201:
+            return null;
+        default:
+            console.log("Error al obtener la foto del producto");
+            return null;
+    }
+}
 
 export default function MainResults() {
     return {
@@ -20,10 +31,12 @@ export default function MainResults() {
             // obtain the cards from the server
             const response = await obtainAllCards(page);
             // create the cards
-            const tarjetas = response.map((card) => {
-                console.log("CARD: ", card);
-                return CardWrapper().render(card.NombreProducto, card.Calificacion, card.Precio, card.Portada, card.NombreVendedor, card.IDProducto, card.Tipo);
-            }).join('\n');
+            const tarjetas = await Promise.all(
+                response.map(async (producto) => {
+                    const foto = await getProductoFoto(producto.IDProducto);
+                    return CardWrapper().render(producto.NombreProducto, producto.Calificacion, producto.Precio, foto[0].Portada, producto.NombreVendedor, producto.IDProducto, producto.Tipo);
+                })
+            );
 
             return `
                 <div class="w-full p-4">

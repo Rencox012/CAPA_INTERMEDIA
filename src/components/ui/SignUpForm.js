@@ -1,4 +1,29 @@
 //sign up form component
+
+
+function handleShowPrivacitySelector(){
+    //Get the role selector
+    const roleSelector = document.getElementById('Role');
+    //attach the event listener to the role selector
+    roleSelector.addEventListener('change', (event) => {
+        //Get the privacity selector
+        const privacitySelector = document.getElementById('Privacity');
+        //if the role is Comprador, show the privacity selector
+        if(event.target.value === 'Comprador'){
+            privacitySelector.classList.remove('hidden');
+        }
+        //if the role is Vendedor, hide the privacity selector
+        else{
+            privacitySelector.classList.add('hidden');
+        }
+    });
+
+}
+
+export function assignListeners(){
+    handleShowPrivacitySelector();
+}
+
 export default function SignUpForm() {
 
     
@@ -9,8 +34,6 @@ export default function SignUpForm() {
             function handlePassword(value){
                 //validate the password
                 if(value === ''){
-                    //if the password is empty, it will display a message
-                    console.log('Please enter a password');
                     document.getElementById('password').setCustomValidity('Please enter a password');
                     //if the message with id warning does not exist in the document, it will create a new message
                     if(!document.getElementById('warning')){
@@ -24,8 +47,8 @@ export default function SignUpForm() {
                 //if the password is not empty, it will not display a message
                 else{
 
-                    //check with regex if it has at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character
-                    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+                    //check with regex if it has at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character, other languages characters like ñ are not considered special characters
+                    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/;
                     if(!passwordRegex.test(value)){
                         console.log('Please enter a valid password');
                         document.getElementById('password').setCustomValidity('Please enter a valid password');
@@ -45,7 +68,6 @@ export default function SignUpForm() {
                         }
                         document.getElementById('password').setCustomValidity('');
                     }
-                   
                 }
             }
             
@@ -87,7 +109,7 @@ export default function SignUpForm() {
 
 
             return `
-               <form class="bg-form-background shadow-md p-form-x rounded-form justify-center items-center"
+            <form class="bg-form-background shadow-md p-form-x rounded-form justify-center items-center"
                 id="sign-up-form"
                 method="POST"
                 >
@@ -114,11 +136,22 @@ export default function SignUpForm() {
                         class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="email" 
                         type="text" 
-                        oninput="(${handleEmail})(event)"
                         placeholder="Email"
                         name = "email"
                         required
                         >
+                        <!-- select with possible emails -->
+                        <select id="email-extension" class="shadow border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
+                            <option value="@gmail.com"> @gmail.com </option>
+                            <option value="@hotmail.com"> @hotmail.com </option>
+                            <option value="@outlook.com"> @outlook.com </option>
+                            <option value="@yahoo.com" > @yahoo.com </option>
+                            <option value="@live.com" > @live.com </option>
+                            <option value="@protonmail.com" > @protonmail.com </option>
+                            <option value="@aol.com" >  @aol.com </option>
+                            <option value="@icloud.com" > @icloud.com </option>
+                        </select>
+
                     </div>
                     <div class="mb-4">
                         <label class="block text-white text-sm font-bold mb-2 opacity-95" for="name">
@@ -169,7 +202,6 @@ export default function SignUpForm() {
                         >
                             <option value = "Hombre"> Hombre </option>
                             <option value = "Mujer"> Mujer </option>
-                            <option value = "Otro"> Otro </option>
                         </select>
                     </div>
                     <div class="mb-6 w-2/3">
@@ -195,6 +227,14 @@ export default function SignUpForm() {
                         >
                             <option value = "Comprador"> Comprador </option>
                             <option value = "Vendedor"> Vendedor </option>
+                        </select>
+                        <!--If the user is a Comprador, it needs to select wether it wants to be private or public-->
+                        <select class="shadow border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="Privacity"
+                        name = "Privacity"
+                        >
+                            <option value = "1"> Publico </option>
+                            <option value = "0"> Privado </option>
                         </select>
                     </div>
                     <div class="flex items-center justify-between">

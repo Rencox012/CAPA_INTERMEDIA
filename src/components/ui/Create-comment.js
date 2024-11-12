@@ -31,7 +31,22 @@ async function handleSubmitComment(id){
             console.log("Error: ", error);
         });
 }
-
+async function getExisteCompra(){
+    const user = User.load();
+    const urlParams = new URLSearchParams(window.location.search);
+    const productoID = urlParams.get('id');
+    const response = await api.products.getExisteCompra(productoID, user.uid);
+    switch (response.status){
+        case 200:
+            const data = await response.json();
+            return data !== [];
+        case 201:
+            return true;
+        default:
+            console.log("Error al obtener la existencia de la compra");
+            return null;
+    }
+}
 export function assignFunctions(){
     //assign the function to the form
     document.getElementById('comentario').addEventListener('submit', (event) => {
@@ -44,8 +59,19 @@ export function assignFunctions(){
 
 export default function CreateComment(){
     return{
-        render: () => {
-            console.log ("RENDERING CREATE COMMENT");
+        render: async () => {
+
+            const usuario = User.load();
+            if(usuario.rol !== "comprador"){
+                return ``;
+            }
+            //check if the user has bought the product
+            const response = await getExisteCompra();
+            if (response === false){
+                return ``;
+            }
+
+            console.log("RENDERING CREATE COMMENT");
             return `
             <div class=" mx-24 p-4 bg-white/10 rounded-2xl">
                 <div class="flex items-center px-20 mt-4">

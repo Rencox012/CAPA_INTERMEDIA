@@ -1,5 +1,6 @@
 import ListasDropdown from "./ListasDropdown.js";
 import { User } from "../../utility/classes/user.js";
+import api from "../../api/api.js";
 //componente que muestra la información de un producto
 //tiene varias imagenes del producto, nombre, precio, rating, descripción, número de reviews, vendedor y tags
 function handleImageChange(){
@@ -34,20 +35,155 @@ function handleImageChange(){
 
 }
 
+async function getCarrito(){
+    //Get the user id
+    const user = User.load();
+    if(user !== null){
+        //Get the carrito
+        const response = await api.cart.getCart(user.uid);
+        switch(response.status){
+            case 200:
+                const data = await response.json();
+                console.log("CARRITO: ", data);
+                return data;
+            case 404:
+                console.log("No se encontró el carrito");
+                return null;
+            default:
+                console.log("Error al obtener el carrito");
+                return null;
+        }
+    }
+}
+
+async function handleCantidadLimit(){
+    //this function limits the amount of products that can be added to the cart
+    const urlParams = new URLSearchParams(window.location.search);
+    const productoID = urlParams.get('id');
+    const cantidad = document.getElementById('cantidad');
+    const response = await api.products.getExistencias(productoID)
+    let existencias = 0;
+    switch (response.status){
+        case 200:
+            const data = await response.json();
+            //get element 0 from the data array
+            existencias = data[0].Existencias;
+            break;
+        case 404:
+            console.log("No se encontraron las existencias del producto");
+            return;
+        default:
+            console.log("Error al obtener las existencias del producto");
+            return;
+    }
+    cantidad.addEventListener('input', () => {
+        if(cantidad.value > existencias){
+            alert("No hay suficientes productos en existencia");
+            cantidad.value = existencias;
+        }
+        else if(cantidad.value < 1){
+            cantidad.value = 1;
+        }
+    });
+}
+
+async function insertConversation(){
+    //get the contactar button
+    const contactar = document.getElementById('contactar');
+    //assign a listener
+    contactar.addEventListener('click', async () => {
+        //Get the user from the local storage
+        const user = User.load();
+        //get the seller ID from the contactar button
+        const SellerID = document.getElementById('contactar').getAttribute('key');
+        //get the product id from the url params
+        const urlParams = new URLSearchParams(window.location.search);
+        const productoID = urlParams.get('id');
+        //call the api
+        const response = await api.conversations.insertConversation(SellerID, user.uid , productoID);
+        switch (response.status){
+            case 200:
+                console.log("Conversación creada");
+                //send the user to the chat page
+                window.location.href = "Chat.php";
+            case 404:
+                console.log("No se encontró el usuario");
+                return null;
+            default:
+                console.log("Error al crear la conversación");
+                return null;
+        }
+    });
+
+}
+
+
+async function getExistencias(){
+    //this function gets the existencias of the product
+    const urlParams = new URLSearchParams(window.location.search);
+    const productoID = urlParams.get('id');
+    const response = await api.products.getExistencias(productoID);
+    switch(response.status){
+        case 200:
+            const data = await response.json();
+            return data[0].Existencias;
+        case 404:
+            console.log("No se encontraron las existencias del producto");
+            return 0;
+        default:
+            console.log("Error al obtener las existencias del producto");
+            return 0;
+    }
+}
+
+async function handleAddToCart(){
+    //we will send the CartID, the productID and the quantity to the server
+    const comprarBoton = document.getElementById('comprar-boton');
+    comprarBoton.addEventListener('click', async () => {
+        const carritoID = comprarBoton.getAttribute('key');
+        const cantidad = document.getElementById('cantidad').value;
+        if(cantidad === ""){
+            console.log("No se ha seleccionado una cantidad");
+            alert("Por favor selecciona una cantidad");
+            return;
+        }
+
+        //obtain the procut id from the url, the value of id
+        const urlParams = new URLSearchParams(window.location.search);
+        const productoID = urlParams.get('id');
+        
+        const response = await api.cart.InsertarElementoCarrito(carritoID, productoID, cantidad);
+        switch(response.status){
+            case 200:
+                console.log("Producto añadido al carrito");
+                //Send the user to the cart page
+                window.location.href = "carrito.php";
+                break;
+            case 404:
+                console.log("No se encontró el carrito");
+                alert("No se agrego el producto");
+                break;
+            default:
+                console.log("Error al añadir el producto al carrito");
+                break
+        }
+    });
+}
 export function assignFunctions(){
-    //this function assigns the functions to the elements
-    console.log ("assigning functions");
     handleImageChange();
+    handleCantidadLimit();
+    handleAddToCart();
+    insertConversation();
 }
 
 export default function Producto() {
     return {
         render: async (name, video, images, price, rating, descripcion, reviewNumber, seller, sellerID, tipo) => {
 
-
+            const existencias = await getExistencias();
             var agregarLista;
             const user = User.load();
-            if(user !== null){
+            if(user !== null && user.rol !== "vendedor"){
                 const elementoListas = await ListasDropdown().render(user.uid);
                 agregarLista  = tipo === "Producto" ? 
                 `
@@ -58,18 +194,33 @@ export default function Producto() {
             else{
                 agregarLista = ``;
             }
-            
 
-            //Segun el tipo de producto, se mostrará el precio y el boton de comprar, o se mostrará que es un servicio y un boton de contactar al vendedor
-            const tipoProducto = tipo === "Producto" ? `<span class="text-green font-bold text-lg">$${price} MXN</span>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2">Añadir al carrito</button>` :
-            `<span class="text-green font-bold text-lg">Servicio</span><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2" id=${sellerID}>Contactar al vendedor</button>`;
+            const carritoID = await getCarrito();
+
+            const userRole = user !== null ? user.rol : null;
+            let tipoProducto = "";
+            if(existencias === 0 || existencias === null){
+                tipoProducto = `<span class="text-red font-bold text-lg">Producto agotado</span>`;
+            }
+            else{
+                if(userRole !== "vendedor" && userRole !== null && userRole !== "admin" && userRole !== "superAdmin"){
+                    //Segun el tipo de producto, se mostrará el precio y el boton de comprar, o se mostrará que es un servicio y un boton de contactar al vendedor, si es que el usuario no es un vendedor
+                    tipoProducto = tipo === "Producto" ? `<span class="text-green font-bold text-lg">$${price} MXN</span>
+                <!-- Input de numeros donde le permita al usuario seleccionar la cantidad de productos que quiere comprar -->
+                <input type="number" id="cantidad" name="cantidad" min="1" max="100" class="w-1/4 h-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Cantidad" required>
+                <button id="comprar-boton" key=${carritoID.IDCarrito} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2">Añadir al carrito</button>`
+                        :
+                        `<span class="text-green font-bold text-lg">Servicio</span><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2" id="contactar" key ="${sellerID}">Contactar al vendedor</button>`;
+                }
+            }
+
+
 
             
 
             return `
-            <div class="w-11/12 h-10/12 bg-white rounded-lg shadow-lg p-4">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+            <div class="w-full h-full bg-white rounded-lg shadow-lg p-4 overflow-hidden">
+                <div class="flex flex-row md:flex-row md:items-center md:justify-between">
                     <div class="flex flex-col md:flex-row items-center justify-center md:justify-start">
                         <h1 class="text-2xl font-bold text-gray-800">${name}</h1>
                         <div class="flex items-center mt-2 md:mt-0 md:ml-4">
@@ -83,13 +234,15 @@ export default function Producto() {
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row mt-4 h-[48rem]">
+                <div class="flex flex-row md:flex-row mt-4 h-[48rem]">
                     <div class="flex flex-col md:w-7/12">
                         <div class="flex flex-col gap-4 h-full">
                             <div class="flex flex-col gap-2 h-[38rem]">
                                 <h2 class="text-lg font-semibold text-gray-800">Descripción</h2>
                                 <p class="text-gray-500 text-sm">${descripcion}</p>
                             </div>
+                            <h2 class="text-lg font-semibold text-gray-800">Vendedor</h2>
+                            <p class="text-gray-500 text-sm">${seller}</p>
                             
                         </div>
                     </div>
@@ -112,6 +265,7 @@ export default function Producto() {
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="flex flex-col items-center mt-4">
                                 ${tipoProducto}
                             </div>
@@ -121,9 +275,8 @@ export default function Producto() {
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col mt-4">
-                    <h2 class="text-lg font-semibold text-gray-800">Vendedor</h2>
-                    <p class="text-gray-500 text-sm">${seller}</p>
+                <div class="flex flex-row mt-4">
+                   
                 </div>
             </div>
             `;

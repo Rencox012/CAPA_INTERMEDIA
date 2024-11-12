@@ -53,7 +53,7 @@
             let rol = $("#Rol").val();
 
             // Call the login function
-           await api.users.login(email, password, rol).then((response) => {
+        await api.users.login(email, password, rol).then((response) => {
                 // Parse the JSON from the response
                 console.log(response);
                 if (!response.ok) {
@@ -64,7 +64,7 @@
                     return response.json();
                 }
             }).then((data) => {
-               setCookie("user", data.uid, 1);
+            setCookie("user", data.uid, 1);
                     // Create a new user object
                     let user = new User(
                         data.IDUsuario,

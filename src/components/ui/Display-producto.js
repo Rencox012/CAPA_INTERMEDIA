@@ -1,6 +1,7 @@
 //component that will contain a product
 import Producto from "./Producto.js";
 import api from "../../api/api.js";
+import {User} from "../../utility/classes/User.js";
 
 async function obtainProduct(id){
     // Call the login function

@@ -1,12 +1,14 @@
 //component that will contain all the comments of a product
 import CommentWrapper from "./Comment-wrapper.js";
 import api from "../../api/api.js";
+import {User} from "../../utility/classes/User.js";
 
 async function obtainAllComments (id){
     // Call the login function
     const response = await api.comments.getComments(id)
         return response.json();
 }
+
 
 export default function CommentarySection() {
     return{

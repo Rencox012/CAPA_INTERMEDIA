@@ -27,13 +27,17 @@
             navbarContainer.innerHTML = navbar;
         }
     </script>
-      <div id="form-container" class="flex justify-center items-center m-2"></div>
-    <script type = "module">
-        import LoginForm from "../components/ui/SignUpForm.js";
-        const formContainer = document.getElementById('form-container');
-        const form = LoginForm().render();
-        formContainer.innerHTML = form;
-    </script>
+    <div id="form-container" class="flex justify-center items-center m-2">
+        <script type = "module">
+            import LoginForm from "../components/ui/SignUpForm.js";
+            import {assignListeners} from "../components/ui/SignUpForm.js";
+            const formContainer = document.getElementById('form-container');
+            const form = LoginForm().render();
+            formContainer.innerHTML = form;
+
+            assignListeners();
+        </script>
+    </div>
 
 <script type="module">
     import api from "../api/api.js";
@@ -47,12 +51,19 @@
             let apellidos = $("#apellidos").val();
             let sex = $("#Sex").val();
             let email = $("#email").val();
+            //get the value of the selected option inside the select element email-extension
+            email += $("#email-extension").val();
             let direccion = $("#direccion").val();
             let password = $("#password").val();
             let role = $("#Role").val();
+            let privacity = 1;
+            //If the role is comprador, take the value of the select element privacity
+            if(role == 1){
+                privacity = $("#Privacity").val();
+            }
             
             // Call the login function
-           await api.users.register(file, name, apellidos, sex, direccion,  email, password, role).then((response) => {
+        await api.users.register(file, name, apellidos, sex, direccion,  email, password, role, privacity).then((response) => {
                 // Parse the JSON from the response
                 console.log(response);
                 if (!response.ok) {

@@ -1,108 +1,71 @@
-window.paypal
-    .Buttons({
-        style: {
-            shape: "pill",
-            layout: "vertical",
-            color: "blue",
-            label: "buynow",
-        } ,
+import { productosArray } from "../../components/ui/carrito/Producto-wrapper.js";
+import api from "../../api/api.js";
+import { User } from "../classes/User.js";
+import ProductoWrapper from "../../components/ui/carrito/Producto-wrapper.js";
+paypal.Buttons({
+    createOrder: (data, actions) => {
+        console.log(productosArray);
+        const total = productosArray.reduce((sum, producto) => sum + producto.Precio * producto.CantidadEnCarrito, 0);
 
-        async createOrder() {
-            try {
-                const response = await fetch("/CAPA_INTERMEDIA/src/server/paypal.php/createOrder", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    // use the "body" param to optionally pass additional order information
-                    // like product ids and quantities
-                    body: JSON.stringify({
-                        cart: [
-                            {
-                                id: "555",
-                                quantity: "1",
-                            },
-                        ],
-                        total : "100",
-                    }),
-                });
+        const itemTotal = productosArray.reduce((sum, producto) => sum + producto.Precio * producto.CantidadEnCarrito, 0);
 
-                const orderData = await response.json();
+        if (total <= 0) {
+            alert("No puedes comprar sin productos en el carrito");
+            return;
+        }
 
-                if (orderData.id) {
-                    return orderData.id;
-                }
-                const errorDetail = orderData?.details?.[0];
-                const errorMessage = errorDetail
-                    ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
-                    : JSON.stringify(orderData);
-
-                throw new Error(errorMessage);
-            } catch (error) {
-                console.error(error);
-                // resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
-            }
-        } ,
-
-        async onApprove(data, actions) {
-            try {
-                const response = await fetch(
-                    `/CAPA_INTERMEDIA/src/server/paypal.php/createOrder`,
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            orderID: data.orderID,
-                        }),
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: total.toFixed(2), // The overall total amount
+                    currency_code: "USD",
+                    breakdown: {
+                        item_total: {
+                            value: total.toFixed(2), // Total of all items
+                            currency_code: "USD"
+                        }
                     }
-                );
+                },
+                description: 'Compra de productos',
+                items: productosArray.map(producto => ({
+                    name: producto.Nombre,
+                    unit_amount: {
+                        value: producto.Precio,
+                        currency_code: "USD"
+                    },
+                    quantity: producto.CantidadEnCarrito
+                }))
+            }]
+        });
+    },
+    onApprove: (data, actions) => {
+        return actions.order.capture().then( async function(details) {
+            document.getElementById('result-message').textContent = 'Pago completado por ' + details.payer.name.given_name;
+            console.log('Detalles de la transacción:', details);
 
-                const orderData = await response.json();
-                // Three cases to handle:
-                //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-                //   (2) Other non-recoverable errors -> Show a failure message
-                //   (3) Successful transaction -> Show confirmation or thank you message
+            const usuario = User.load();
 
-                const errorDetail = orderData?.details?.[0];
-
-                if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
-                    // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-                    // recoverable state, per
-                    // https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
-                    return actions.restart();
-                } else if (errorDetail) {
-                    // (2) Other non-recoverable errors -> Show a failure message
-                    throw new Error(
-                        `${errorDetail.description} (${orderData.debug_id})`
-                    );
-                } else if (!orderData.purchase_units) {
-                    throw new Error(JSON.stringify(orderData));
-                } else {
-                    // (3) Successful transaction -> Show confirmation or thank you message
-                    // Or go to another URL:  actions.redirect('thank_you.html');
-                    const transaction =
-                        orderData?.purchase_units?.[0]?.payments
-                            ?.captures?.[0] ||
-                        orderData?.purchase_units?.[0]?.payments
-                            ?.authorizations?.[0];
-                    resultMessage(
-                        `Transaction ${transaction.status}: ${transaction.id}<br>
-            <br>See console for all available details`
-                    );
-                    console.log(
-                        "Capture result",
-                        orderData,
-                        JSON.stringify(orderData, null, 2)
-                    );
-                }
-            } catch (error) {
-                console.error(error);
-                resultMessage(
-                    `Sorry, your transaction could not be processed...<br><br>${error}`
-                );
+            //For each product in the array, we create a transaction using the api
+            for (const producto of productosArray) {
+                const total = producto.Precio * producto.CantidadEnCarrito;
+                const response = await api.transactions.insertTransacction(producto.IDElemento, producto.IDProducto, producto.CantidadEnCarrito, usuario.uid, total, "Paypal");
+                if(response.status !== 200){
+                    console.error("Error al insertar la transacción");
+                    }
+                    else{
+                        console.log("Transacción insertada correctamente");
+                        //remove all elements from the productos array
+                        productosArray.splice(0, productosArray.length);
+                        //reload the products in page
+                        const productosHTML = ProductoWrapper().updateProductos();
+                        const objetosContainer = document.getElementById('Carrito-objetos-container');
+                        objetosContainer.innerHTML = productosHTML;
+                    }
+                console.log(response);
             }
-        } ,
-    })
-    .render("#paypal-button-container"); 
+        });
+    },
+    onError: (err) => {
+        console.error("Error en el pago", err);
+    }
+}).render('#paypal-button-container');

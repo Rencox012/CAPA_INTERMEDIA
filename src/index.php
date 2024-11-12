@@ -1,6 +1,4 @@
-<?php
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing page</title>
     <link href="./output.css" rel="stylesheet">
-</head>
 </head>
 <body class="bg-page-background">
     <script src="https://unpkg.com/feather-icons"></script>
@@ -21,13 +18,11 @@
         //if the user is on mobile, render the mobile navbar
         if (window.innerWidth <= 768) {
             const navbarContainer = document.getElementById('navbar-container');
-            const navbar = NavBarMobile().render();
-            navbarContainer.innerHTML = navbar;
+            navbarContainer.innerHTML = NavBarMobile().render();
         }
         else{
             const navbarContainer = document.getElementById('navbar-container');
-            const navbar = NavBar().render();
-            navbarContainer.innerHTML = navbar;
+            navbarContainer.innerHTML = NavBar().render();
         }
        
     </script>

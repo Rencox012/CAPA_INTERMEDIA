@@ -86,7 +86,7 @@
     <main class="h-full">
         <div 
         id="Producto-display"
-        class="flex justify-center items-center mt-24 mr-2 ml-2 px-24 py-12 w-full h-full"
+        class="flex justify-center items-center mt-24 mr-2 ml-2 px-24 pt-12 w-full h-full overflow-hidden"
         >
         <script type="module">
             import DisplayProducto from "../components/ui/Display-producto.js";
@@ -99,7 +99,6 @@
             import {assignFunctions} from "../components/ui/Producto.js"
             assignFunctions();
             import {assignFunctions as FuncionesModal} from "../components/ui/ListasDropdown.js";
-            // Cuando el documento cargue, asigna las funciones a los botones
             FuncionesModal();
         </script>
         </div>
@@ -109,7 +108,7 @@
         <script type="module">
             import CreateComment from "../components/ui/Create-comment.js";
             const commentContainer = document.getElementById('Create-comment');
-            const comment = CreateComment().render();
+            const comment = await CreateComment().render();
             commentContainer.innerHTML = comment;
 
             import {assignFunctions} from "../components/ui/Create-comment.js"

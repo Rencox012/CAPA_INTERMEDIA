@@ -12,10 +12,91 @@ async function obtainLists(id){
     }
 }
 
+async function getProductoExisteLista(idLista, idProducto){
+    //Call the getProductoExisteLista function
+    const response = await api.lists.getProductoExisteLista(idLista, idProducto);
+    switch(response.status){
+        case 200:
+            //Check the response, if the Exist field different from null, we return the response
+            let respuesta = await response.json();
+            //access the object data and the field Existe
+            let data = respuesta.data;
+            if(data.Existe !== null){
+                return null;
+            }
+            else{
+                return respuesta;
+            }
+        case 404:
+            return null;
+        default:
+            return null;
+    }
+}
+
+async function insertProduct(idLista, idProducto, cantidad){
+    //Call the insertProductoLista function
+    const response = await api.lists.insertProductoLista(idLista, idProducto, cantidad);
+    switch(response.status){
+        case 200:
+            return response.json();
+        case 404:
+            return null;
+        default:
+            return null;
+    }
+}
+
+function handleAddproduct(){
+
+    //Get the add button
+    const button = document.getElementById('add-list');
+
+    if(button === null){
+        return;
+    }
+
+    //attach the event listener to the button
+    button.addEventListener('click', async () => {
+        //get the ID of the product from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idProducto = urlParams.get('id');
+    //Get the id of the list from the dropdown
+    const select = document.getElementById('listas');
+    const idLista = select.value;
+    const cantidad = 1;
+    //Check if the list already has the product
+    const exists = await getProductoExisteLista(idLista, idProducto);
+    //The response will be either a null or a bool
+    if(exists === null || exists.data === true){
+        //If the product exists, we show an error message
+        console.log("El producto ya existe en la lista");
+        alert("El producto ya existe en la lista");
+        return;
+    }
+    //If the product does not exist, we insert it
+    const response = insertProduct(idLista, idProducto, cantidad);
+    if(response === null){
+        console.log("Error al insertar el producto");
+        alert("Error al insertar el producto");
+        return;
+    }
+    console.log("Producto insertado correctamente");
+    alert("Producto insertado correctamente");
+    }
+    );
+
+    
+    
+}
+
 function showCreationModal(){
     //show the modal to create a new list
     //prevent from being activated when loaded
     const button = document.getElementById('modal-button');
+    if(button === null){
+        return;
+    }
     button.addEventListener('click', () => {
         console.log("Button clicked");
         const modal = document.getElementById('modal');
@@ -28,6 +109,9 @@ function showCreateButton(){
     const select = document.getElementById('listas');
     const button = document.getElementById('modal-button');
     const button2 = document.getElementById('add-list');
+    if(select === null || button === null || button2 === null){
+        return;
+    }
     select.addEventListener('change', () => {
         if(select.value === "Agregar"){
             button.classList.remove('hidden');
@@ -42,6 +126,7 @@ function showCreateButton(){
 export function assignFunctions(){
     showCreationModal();
     showCreateButton();
+    handleAddproduct();
 }
 
 export default function ListasDropdown() {

@@ -66,7 +66,7 @@ export default function LoginForm() {
                         <input 
                         class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="email" 
-                        type="email" 
+                        type="text" 
                         placeholder="Email"
                         name = "email"
                         required
@@ -98,6 +98,7 @@ export default function LoginForm() {
                         <option value="comprador">Comprador</option>
                         <option value="vendedor">Vendedor</option>
                         <option value="admin">Administrador</option>
+                        <option value="superAdmin">Super Administrador</option>
                     </select>
                     </div>
                     <div class="flex items-center justify-between">

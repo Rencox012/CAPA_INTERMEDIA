@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js,php}"],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -23,6 +24,15 @@ module.exports = {
         'page-background' : '#08080d', //black color for the page background
         //COLOR FOR FORM BACKGROUND
         'form-background' : 'rgba(10, 94, 166, 0.26)', //White color for the form background
+        dark: {
+          100: '#1a1a1a',
+          200: '#2d2d2d',
+          300: '#404040',
+          400: '#4B5563',
+          500: '#374151',
+          600: '#1F2937',
+          700: '#111827',
+        }
       },
       borderRadius: {
         'button': '0.375rem', // Custom border radius for buttons
