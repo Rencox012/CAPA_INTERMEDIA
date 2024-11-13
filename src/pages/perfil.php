@@ -103,6 +103,7 @@
             import auth from "../utility/middleware/auth.js";
             import {assignFunctions as FuncionesFiltrosProductos} from "../components/ui/perfil-tabs/productos.js";
             import {assignFunctions as FuncionesModalModificarProducto} from "../components/ui/perfil-tabs/productos-wrapper.js"
+            import {assignFunctions as FuncionesDatosUsuario} from "../components/ui/Datos-usuario.js"
 
             if(!auth().isLoggedIn()){
                 window.location.href = './login.php';
@@ -123,6 +124,7 @@
             FuncionesFiltros();
             FuncionesFiltrosProductos();
             FuncionesModalModificarProducto();
+            FuncionesDatosUsuario();
             
         </script>
         </div>

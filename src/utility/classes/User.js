@@ -26,9 +26,9 @@ export class User {
         return new Blob([ab], { type: mimeString });
     }
 
-    async save() {
+    static save(user) {
       
-        localStorage.setItem('user', JSON.stringify(this));
+        localStorage.setItem('user', JSON.stringify(user));
     }
 
     static load() {

@@ -95,6 +95,19 @@ const api = {
                         'Content-Type': 'application/json',
                     }
                 });
+        },
+        updateUserInfo: async function(id, nombre, apellidos, direccion, foto, correo){
+            const formData = new FormData();
+            formData.append('id', id);
+            formData.append('nombre', nombre);
+            formData.append('apellidos', apellidos);
+            formData.append('direccion', direccion);
+            formData.append('foto', foto);
+            formData.append('correo', correo);
+            return fetch('/CAPA_INTERMEDIA/src/server/users.php/updateUserInfo', {
+                method: 'POST',
+                body: formData
+            });
         }
     },
     products: {

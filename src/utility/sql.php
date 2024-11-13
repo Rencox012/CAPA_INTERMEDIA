@@ -342,6 +342,46 @@ function getUserInfo($idUsuario){
         return $resultado;
     }
 }
+function updateUserInfo($idUsuario, $foto, $correo, $nombre, $apellidos, $direccion){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'code' => null,
+        'text' => null
+    ];
+    //prepare the connection
+    $conn = connect();
+    try{
+        //prepare the transaction
+        $conn->beginTransaction();
+        $sql = "CALL UpdateUsuarioInfo(:idUsuario, :foto, :correo, :nombre, :apellidos, :direccion)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_STR_CHAR);
+        //Check if the photo is already encoded in base 64 or if it is a blob file, if it is a blob, encode it, otherwise, just send it
+        if(!isBase64($foto)){
+            $foto = base64_encode($foto);
+        }
+        $stmt->bindParam(':foto', $foto, PDO::PARAM_STR_CHAR);
+        $stmt->bindParam(':correo', $correo, PDO::PARAM_STR_CHAR);
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR_CHAR);
+        $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR_CHAR);
+        $stmt->bindParam(':direccion', $direccion, PDO::PARAM_STR_CHAR);
+        $stmt->execute();
+        $conn->commit();
+        //if there are no errors, return the success message
+        $resultado['data'] = 'User updated';
+        $resultado['code'] = 200;
+    } catch (PDOException $e) {
+        // Handle error
+        $conn->rollBack();
+        $resultado['success'] = false;
+        $resultado['code'] = 500;
+        $resultado['text'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    }
+}
 
 
 #endregion
@@ -1950,4 +1990,13 @@ function getExisteCotizacion($idConversacion){
 function blobToBase64($blob): string
 {
     return base64_encode($blob);
+}
+function isBase64($string): bool
+{
+    //check if the element passed is already encoded in base64
+    if (base64_encode(base64_decode($string, true)) === $string){
+        return true;
+    } else {
+        return false;
+    }
 }

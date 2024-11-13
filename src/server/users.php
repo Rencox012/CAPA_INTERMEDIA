@@ -267,6 +267,34 @@ switch($method){
             return;
         }
 
+        if(strpos($_SERVER['REQUEST_URI'], 'users.php/updateUserInfo')){
+            if(isset($_POST['id']) && isset($_POST['correo']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['direccion']) && isset($_FILES['foto'])){
+                $id = $_POST['id'];
+                $nombre = $_POST['nombre'];
+                $apellidos = $_POST['apellidos'];
+                $direccion = $_POST['direccion'];
+                $correo = $_POST['correo'];
+                $foto = file_get_contents($_FILES['foto']['tmp_name']);
+                try{
+                    $products = updateUserInfo($id, $foto, $correo, $nombre, $apellidos, $direccion);
+                    if($products['success']){
+                        header('HTTP/1.1 200 OK');
+                        echo json_encode($products['data']);
+                    }else{
+                        header('HTTP/1.1 404 Not Found');
+                        echo json_encode(['message' => 'No users found', 'sqlData  ' => $products]);
+                    }
+                }catch(PDOException $e){
+                    echo "Error: " . $e->getMessage();
+                }
+            }
+            else{
+                header('HTTP/1.1 400 Bad Request');
+                echo json_encode(['message' => 'All fields are required']);
+            }
+            return;
+        }
+
 
         //If the endpoint is not found, return a 404 
         header('HTTP/1.1 404 Not Found');
