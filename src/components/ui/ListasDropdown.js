@@ -147,8 +147,8 @@ export default function ListasDropdown() {
             //if the response is empty, we return a list with a single element that allows the user to create a new list
             if(response.message){
                 return `
-                <div class="relative flex flex-row items-center justify-center">
-                    <div class = "relative flex flex-row items-center">
+                <div class="relative flex flex-row items-center justify-center overflow-x-visible">
+                    <div class = "relative flex flex-row items-center overflow-x-visible">
                         <Button id="modal-button" class="text-gray-800 font-semibold mr-2 hover:bg-slate-100  p-4 rounded-lg hover:scale-105 duration-75 active:bg-slate-400 active:scale-95">Crear una nueva lista</Button>
                     </div>
                     <select class="bg-white border border-gray-400 text-gray-800 py-2 px-4 pr-8 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2">
@@ -171,7 +171,7 @@ export default function ListasDropdown() {
                     ).join('\n');
                     //create a dropdown with the lists
                     return `
-                    <div class="relative flex flex-row items-center justify-center">
+                    <div class="relative flex flex-col items-center justify-center">
                         <div class = "relative flex flex-row items-center">
                             <button id="add-list" class="bg-blue-500 hover:bg-blue-700 mr-2 text-white font-bold p-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-50">Agregar a lista</button>
                             ${creatiomButton}

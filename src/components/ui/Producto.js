@@ -208,9 +208,9 @@ export default function Producto() {
                     tipoProducto = tipo === "Producto" ? `<span class="text-green font-bold text-lg">$${price} MXN</span>
                 <!-- Input de numeros donde le permita al usuario seleccionar la cantidad de productos que quiere comprar -->
                 <input type="number" id="cantidad" name="cantidad" min="1" max="100" class="w-1/4 h-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Cantidad" required>
-                <button id="comprar-boton" key=${carritoID.IDCarrito} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2">Añadir al carrito</button>`
+                <button id="comprar-boton" key=${carritoID.IDCarrito} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2 overflow-x-visible">Añadir al carrito</button>`
                         :
-                        `<span class="text-green font-bold text-lg">Servicio</span><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2" id="contactar" key ="${sellerID}">Contactar al vendedor</button>`;
+                        `<span class="text-green font-bold text-lg">Servicio</span><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-50 mt-2 overflow-x-visible" id="contactar" key ="${sellerID}">Contactar al vendedor</button>`;
                 }
             }
 
@@ -234,7 +234,7 @@ export default function Producto() {
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row md:flex-row mt-4 h-[48rem]">
+                <div class="flex flex-row md:flex-row mt-4 h-full pb-16">
                     <div class="flex flex-col md:w-7/12">
                         <div class="flex flex-col gap-4 h-full">
                             <div class="flex flex-col gap-2 h-[38rem]">
@@ -246,8 +246,8 @@ export default function Producto() {
                             
                         </div>
                     </div>
-                    <div class="flex flex-col md:w-5/12 mt-4 md:mt-0 ">
-                        <div class="flex flex-col gap-4 h-full">
+                    <div class="flex flex-col md:w-5/12 mt-4 md:mt-0 h-full overflow-x-visible">
+                        <div class="flex flex-col gap-4 h-full overflow-y-scroll overflow-x-visible">
                             <h2 class="text-lg font-semibold text-gray-800">Imágenes</h2>
                             <div class="flex flex-col gap-2 h-full">
                                 <div class="flex flex-col gap-2 h-full">
@@ -266,10 +266,10 @@ export default function Producto() {
                                 </div>
                             </div>
                             
-                            <div class="flex flex-col items-center mt-4">
+                            <div class="flex flex-col items-center mt-4 overflow-x-visible">
                                 ${tipoProducto}
                             </div>
-                            <div class="flex flex-col items-center mt-4">
+                            <div class="flex flex-col items-center mt-4 overflow-visible">
                                 ${agregarLista}
                             </div>
                         </div>
