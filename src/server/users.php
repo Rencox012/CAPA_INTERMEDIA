@@ -1,9 +1,8 @@
 <?php
-//api that handles the url requests for the users
-//setting the headers
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-//allow form data to be processed
+
 
 header("Access-Control-Allow-Methods: POST");
 
@@ -41,7 +40,7 @@ switch($method){
                     header('HTTP/1.1 404 Not Found');
                     echo json_encode(['message' => 'User not found']);
                 }
-        }
+            }
         else{
             header('HTTP/1.1 400 Bad Request');
             echo json_encode(['message' => 'User ID is required']);

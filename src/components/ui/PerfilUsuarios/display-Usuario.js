@@ -1,6 +1,5 @@
 //(componente que contendra la informacion del usuario
 import api from "../../../api/api.js";
-import {User} from "../../../utility/classes/User.js";
 const user = {
     type: 'vendedor', // 'comprador' o 'vendedor'
     isPrivate: false,
@@ -92,7 +91,7 @@ export default function InfoUsuario(){
             const userFoto = await getUserFoto(userID);
             let listas = [];
             let productos = [];
-            if(user.rol === 'comprador'){
+            if(user.Rol === 'comprador'){
                  listas = await getListasUsuario(userID);
             }
             else{

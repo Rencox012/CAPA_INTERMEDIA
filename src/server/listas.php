@@ -1,16 +1,17 @@
 <?php
-//api that handles the url requests for the users
-//setting the headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-//allow form data to be processed
+
 
 header("Access-Control-Allow-Methods: POST");
+
+
 
 //including the sql.php file
 require_once('../utility/sql.php');
 
 $method = $_SERVER['REQUEST_METHOD'];
+
 
 //switch to determine the method
 switch($method){
@@ -29,9 +30,7 @@ switch($method){
                         if($code == 200){
                             header('HTTP/1.1 200 OK');
                                     //Log the information in log.txt
-                            $log = fopen("log.txt", "a");
-                            fwrite($log, "Enviando la siguiente informacion ".date("Y-m-d H:i:s")." - ".$_SERVER['REQUEST_URI']." - ".json_encode($comments)."\n");
-                            fclose($log);
+                            
                             echo json_encode($comments['data']);
                         } else {
                             header( "HTTP/1.1 $code");
