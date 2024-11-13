@@ -121,6 +121,11 @@ export default function PerfilDisplay(){
                 isHiddenVendedores = "hidden";
             }
 
+            if(user.rol === 'admin' || user.rol === 'superAdmin'){
+                isHidden = "hidden";
+                isHiddenVendedores = "hidden";
+            }
+
 
             return `
 
