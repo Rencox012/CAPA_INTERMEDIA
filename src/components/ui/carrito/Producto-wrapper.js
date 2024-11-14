@@ -177,7 +177,7 @@ function renderProctoHTML(IDElemento, foto ,Precio,CantidadEnCarrito,Nombre, IDP
                     src = "data:image/png;base64,${foto}"
                     onerror="this.src='/CAPA_INTERMEDIA/public/default_course_image.png';"
                     >
-                    <a href="/CAPA_INTERMEDIA/public/producto.php?id=${IDProducto}" class=" *:hover:underline text-white text-xl font-semibold ml-2">
+                    <a href="/CAPA_INTERMEDIA/src/pages/producto.php?id=${IDProducto}" class=" *:hover:underline text-white text-xl font-semibold ml-2">
                         <span id="Producto" key="${IDProducto}" class="text-white text-xl font-semibold ml-2">${Nombre}</span>
                     </a>
                     
