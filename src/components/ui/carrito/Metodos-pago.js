@@ -113,14 +113,10 @@ async function handlePay(){
         const response = await api.transactions.insertTransacction(producto.IDElemento, producto.IDProducto, producto.CantidadEnCarrito, usuario.uid, total, "Tarjeta de crédito");
         if(response.status !== 200){
             console.error("Error al insertar la transacción");
+            alert ("Error al insertar la transacción");
         }
         else{
             console.log("Transacción insertada correctamente");
-            //reload the products in page
-            const newProductos = await ProductoWrapper().updateProductos();
-            //Replace the current page with the new one
-            const objetosContainer = document.getElementById('Carrito-objetos-container');
-            objetosContainer.innerHTML = newProductos;
         }
         console.log(response);
     }
