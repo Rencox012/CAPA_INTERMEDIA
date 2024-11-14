@@ -293,6 +293,18 @@ const api = {
                         precio: precio
                     })
                 });
+        },
+        deleteProducto(idProducto){
+            return fetch(`/CAPA_INTERMEDIA/src/server/productos.php/deleteProducto` ,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        idProducto: idProducto
+                    })
+                });
         }
     },
     comments: {
@@ -387,6 +399,18 @@ const api = {
                     }
                 });
         },
+        deleteProductoLista: async function (idElemento){
+            return fetch(`/CAPA_INTERMEDIA/src/server/listas.php/deleteProductoLista` ,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        idElemento: idElemento
+                    })
+                });
+        }
     },
     cart:{
         getCart: async function(id){

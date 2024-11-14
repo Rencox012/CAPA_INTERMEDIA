@@ -218,6 +218,36 @@ switch($method){
             return;
         }
 
+        if(strpos($_SERVER['REQUEST_URI'], 'listas.php/deleteProductoLista')){
+            $data = json_decode(file_get_contents('php://input'), true);
+            //check if the data is present
+            if(isset($data['idElemento'])){
+                $idElemento = $data['idElemento'];
+                //call the function to create the list
+                try{
+                    $result = deleteProductoLista($idElemento);
+                    if ($result['success']) {
+                        header('HTTP/1.1 200 Created');
+                        echo json_encode(['message' => 'Product deleted from list', 'data' => $result['data']]);
+                    } else {
+                        // If the list is not created, return an error message
+                        $errorCode = $result['code'];
+                        header( "HTTP/1.1 $errorCode");
+                        echo json_encode(['message' => $result['errorText']]);
+                    }
+                }
+                catch(PDOException $e){
+                    // Handle error
+                    echo "Error: " . $e->getMessage();
+                }
+            } else {
+                // If the 'id' or 'nombre' parameters are missing, return an error message
+                header('HTTP/1.1 400 Bad Request');
+                echo json_encode(['message' => 'Id and name are required']);
+            }
+            return;
+        }
+
 
         //if the endpoint is not found, send a 404
         header('HTTP/1.1 404 Not Found');

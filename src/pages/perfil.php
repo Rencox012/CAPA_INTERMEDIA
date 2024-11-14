@@ -104,6 +104,7 @@
             import {assignFunctions as FuncionesFiltrosProductos} from "../components/ui/perfil-tabs/productos.js";
             import {assignFunctions as FuncionesModalModificarProducto} from "../components/ui/perfil-tabs/productos-wrapper.js"
             import {assignFunctions as FuncionesDatosUsuario} from "../components/ui/Datos-usuario.js"
+            import {assignEvents as FuncionesWishlistsEventos} from "../components/ui/WishList-wrapper.js";
 
             if(!auth().isLoggedIn()){
                 window.location.href = './login.php';
@@ -125,6 +126,7 @@
             FuncionesFiltrosProductos();
             FuncionesModalModificarProducto();
             FuncionesDatosUsuario();
+            FuncionesWishlistsEventos();
             
         </script>
         </div>

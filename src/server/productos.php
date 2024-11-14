@@ -518,7 +518,44 @@ switch($method){
                     echo json_encode(['message' => 'All fields are required']);
                 }
                 break;
-
+            case 'deleteProducto':
+                $data = json_decode(file_get_contents('php://input'), true);
+                if(isset($data['idProducto'])){
+                    $idProducto = $data['idProducto'];
+                    try{
+                        $product = deleteProducto($idProducto);
+                        if($product['success']){
+                            switch($product['code']){
+                                case 200:
+                                    header('HTTP/1.1 200 OK');
+                                    echo json_encode($product['data']);
+                                    break;
+                                case 201:
+                                    header('HTTP/1.1 201 Created');
+                                    echo json_encode($product);
+                                    break;
+                                case 404:
+                                    header('HTTP/1.1 404 Not Found');
+                                    echo json_encode(['message' => 'Product not found']);
+                                    break;
+                                default:
+                                    header('HTTP/1.1 500 Internal Server Error');
+                                    echo json_encode(['message' => 'Internal Server Error', 'data' => $product]);
+                                    break;
+                            }
+                        }else{
+                            header('HTTP/1.1 404 Not Found');
+                            echo json_encode(['message' => 'Product not found']);
+                        }
+                    }catch(PDOException $e){
+                        echo "Error: " . $e->getMessage();
+                        $product = [];
+                    }
+                }else{
+                    header('HTTP/1.1 400 Bad Request');
+                    echo json_encode(['message' => 'All fields are required']);
+                }
+                break;
 
             default:
                 header('HTTP/1.1 404 Not Found');

@@ -987,6 +987,37 @@ function updateProducto($idProducto, $cantidad, $precio){
         return $resultado;
     }
 }
+function deleteProducto($idProducto){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'code' => null,
+        'text' => null
+    ];
+    //prepare the connection
+    $conn = connect();
+    try{
+        //prepare the transaction
+        $conn->beginTransaction();
+        $sql = "CALL DeleteProducto(:idProducto)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idProducto', $idProducto, PDO::PARAM_STR_CHAR);
+        $stmt->execute();
+        $conn->commit();
+        //if there are no errors, return the success message
+        $resultado['data'] = 'Product deleted';
+        $resultado['code'] = 200;
+    } catch (PDOException $e) {
+        // Handle error
+        $conn->rollBack();
+        $resultado['success'] = false;
+        $resultado['code'] = 500;
+        $resultado['text'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    }
+}
 #endregion
 #region Comentarios
 function obtainComments($id){
@@ -1241,6 +1272,38 @@ function getProductosLista($idLista){
         }
     } catch (PDOException $e) {
         // Handle error
+        $resultado['success'] = false;
+        $resultado['code'] = 500;
+        $resultado['errorText'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    }
+}
+function deleteProductoLista($idElemento){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'code' => null,
+        'errorText' => null
+    ];
+    //prepare the transaction
+    $conn = connect();
+    try {
+
+        $conn->beginTransaction();
+        $sql = "CALL DeleteProductoLista(:idElemento)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idElemento', $idElemento, PDO::PARAM_STR_CHAR);
+        $stmt->execute();
+        $conn->commit();
+        //if there were no mistakes, return the success message
+        $resultado['data'] = 'Element deleted';
+        $resultado['code'] = 200;
+
+    } catch (PDOException $e) {
+        // Handle error
+        $conn->rollBack();
         $resultado['success'] = false;
         $resultado['code'] = 500;
         $resultado['errorText'] = $e->getMessage();

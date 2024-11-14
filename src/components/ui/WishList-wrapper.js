@@ -27,6 +27,41 @@ async function getProductoPicture(idProducto){
     }
 }
 
+async function deleteProductoLista( idProducto){
+    const response = await api.lists.deleteProductoLista( idProducto);
+    switch(response.status){
+        case 200:
+            return await response.json();
+        case 404:
+            return null;
+        default:
+            return null;
+    }
+}
+
+function handleDeleteProducto(){
+    const buttons = document.querySelectorAll('#delete-button');
+    if(buttons === null){
+        return;
+    }
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', async (event) => {
+            const idElemento = event.target.parentElement.parentElement.id;
+            const response = await deleteProductoLista(idElemento);
+            if(response !== null){
+                window.location.reload();
+            }
+        });
+    });
+}
+
+export function assignEvents(){
+    handleDeleteProducto();
+}
+
+
+
 export default function WishListWrapper(){
     return{
         render: async (idLista) => {

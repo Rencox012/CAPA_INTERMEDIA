@@ -81,6 +81,17 @@ async function updateProducto(idProducto, cantidad, precio){
             return null;
     }
 }
+async function deleteProducto(idProducto){
+    const response = await api.products.deleteProducto(idProducto);
+    switch(response.status){
+        case 200:
+            return true;
+        case 400:
+            return false;
+        default:
+            return null;
+    }
+}
 function handleModal(){
     //get the send button
     const acceptButton = document.getElementById('accept-button');
@@ -111,9 +122,30 @@ function handleModal(){
         modal.classList.add('hidden');
     });
 }
+function handleDeleteProducto(){
+    //Get all the buttons and attach a listener
+    const buttons = document.querySelectorAll('#eliminar-producto');
+    buttons.forEach((button) => {
+        button.addEventListener('click', async () => {
+            //Get the product ID
+            const idProducto = button.parentElement.parentElement.parentElement.id;
+            //Delete the product
+            const response = await deleteProducto(idProducto);
+            if(response === null){
+                alert('Error al eliminar el producto');
+            } else if(response === true){
+                alert('Producto eliminado correctamente');
+                location.reload();
+            } else{
+                alert('Error al eliminar el producto');
+            }
+        });
+    });
+}
 
 export function assignFunctions(){
     handleEditarProducto();
+    handleDeleteProducto();
 }
 
 export default function productosWrapper(){
@@ -159,7 +191,7 @@ export default function productosWrapper(){
                         <button id="editar-producto" key = "${idProducto}" class="${isHidden} bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Editar
                         </button>
-                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        <button id="eliminar-producto" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                             Eliminar
                         </button>
                     </div>
