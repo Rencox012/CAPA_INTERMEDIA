@@ -159,7 +159,6 @@ const api = {
             formData.append('precio', precio);
             formData.append('portada', portada);
             formData.append('tipo', tipo);
-
             return fetch('/CAPA_INTERMEDIA/src/server/productos.php/insertProducto', {
                 method: 'POST',
                 body: formData

@@ -502,10 +502,6 @@ function insertProducto($idUsuario, $nombre, $cantidad, $descripcion, $precio, $
         }
         $stmt->bindParam(':portada', $portada64, PDO::PARAM_STR_CHAR);
         $stmt->bindParam(':tipo', $tipo, PDO::PARAM_STR_CHAR);
-
-        $log = fopen('log.txt', 'a');
-        fwrite($log, "Data: ".json_encode($stmt)."\n");
-        fclose($log);
         $stmt->execute();
         $resultado['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $resultado['data'] = $resultado['data'][0]['IDProducto'];
@@ -515,10 +511,6 @@ function insertProducto($idUsuario, $nombre, $cantidad, $descripcion, $precio, $
 
 
     } catch (PDOException $e) {
-        //log the error
-        $log = fopen('log.txt', 'a');
-        fwrite($log, "Error: ".json_encode($e->getMessage())."\n");
-        fclose($log);
         // Handle error
         $resultado['success'] = false;
         $resultado['code'] = 500;
