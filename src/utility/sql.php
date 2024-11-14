@@ -994,21 +994,17 @@ function deleteProducto($idProducto){
         'code' => null,
         'text' => null
     ];
-    //prepare the connection
     $conn = connect();
     try{
-        //prepare the transaction
         $conn->beginTransaction();
         $sql = "CALL DeleteProducto(:idProducto)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':idProducto', $idProducto, PDO::PARAM_STR_CHAR);
         $stmt->execute();
         $conn->commit();
-        //if there are no errors, return the success message
         $resultado['data'] = 'Product deleted';
         $resultado['code'] = 200;
     } catch (PDOException $e) {
-        // Handle error
         $conn->rollBack();
         $resultado['success'] = false;
         $resultado['code'] = 500;

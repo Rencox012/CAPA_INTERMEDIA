@@ -544,8 +544,8 @@ switch($method){
                                     break;
                             }
                         }else{
-                            header('HTTP/1.1 404 Not Found');
-                            echo json_encode(['message' => 'Product not found']);
+                            header('HTTP/1.1 500 Server ERror');
+                            echo json_encode(['message' => 'Product not found', 'sql' => $product]);
                         }
                     }catch(PDOException $e){
                         echo "Error: " . $e->getMessage();
