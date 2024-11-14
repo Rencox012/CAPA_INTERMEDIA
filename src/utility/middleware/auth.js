@@ -15,7 +15,7 @@ export default function auth(){
             if(user === null || user === undefined){
                 return false
             }
-            return user.rol === "Admin" || user.rol === "superAdmin"
+            return user.rol === "admin" || user.rol === "superAdmin"
         },
         isVendedor: () =>{
             const user = User.load()
