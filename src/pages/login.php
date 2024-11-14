@@ -80,7 +80,7 @@
                     );
                     // Store the user object in the session storage
                     console.log("SAVING THE FOLLOWING USER: ", user);
-                    user.save();
+                    User.save(user);
                     // Print the local storage
                     console.log(localStorage);
                     // Redirect to the dashboard
