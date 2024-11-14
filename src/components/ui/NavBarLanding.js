@@ -46,7 +46,7 @@ export function assignFunctions()
 {
     //assign the functions to the buttons
     if(document.getElementById('logout-button') !== null){
-        document.getElementById('logout-button').addEventListener('click', handleEndSession
+        document.getElementById('logout-button').addEventListener('click', handleEndSession );
     }
     if(document.getElementById('profile') !== null){
         document.getElementById('profile').addEventListener('click', handleSendToProfile);
