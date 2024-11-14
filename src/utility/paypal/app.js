@@ -51,18 +51,21 @@ paypal.Buttons({
                 const response = await api.transactions.insertTransacction(producto.IDElemento, producto.IDProducto, producto.CantidadEnCarrito, usuario.uid, total, "Paypal");
                 if(response.status !== 200){
                     console.error("Error al insertar la transacción");
+                    alert ("Error al insertar la transacción");
                     }
                     else{
                         console.log("Transacción insertada correctamente");
-                        //remove all elements from the productos array
-                        productosArray.splice(0, productosArray.length);
-                        //reload the products in page
-                        const productosHTML = ProductoWrapper().updateProductos();
-                        const objetosContainer = document.getElementById('Carrito-objetos-container');
-                        objetosContainer.innerHTML = productosHTML;
+
                     }
                 console.log(response);
             }
+            //once all the transactions are inserted, clean the array
+            productosArray.length = 0;
+            //reload the total
+            const total = document.getElementById("total");
+            total.innerHTML = "$0";
+            alert("Compra realizada con éxito");
+            location.reload();
         });
     },
     onError: (err) => {
