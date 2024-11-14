@@ -1,16 +1,11 @@
 <?php
-//api that handles the url requests for the users
-//setting the headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-//allow form data to be processed
 
 header("Access-Control-Allow-Methods: POST");
 
-//including the sql.php file
 require_once('../utility/sql.php');
 
-//getting the request method
 $method = $_SERVER['REQUEST_METHOD'];
 $requestUri = $_SERVER['REQUEST_URI'];
 $endpoint = basename(parse_url($requestUri, PHP_URL_PATH));
@@ -191,9 +186,23 @@ switch($method){
                     }
                     try{
                         $products = getBusquedaProductos($query, $filtro, $pagina);
-                        if($products['success']){
-                            header('HTTP/1.1 200 OK');
+                        switch($products['code']){
+                            case 200:
+                                header('HTTP/1.1 200 OK');
                             echo json_encode($products['data']);
+                                break;
+                            case 201:
+                                header('HTTP/1.1 201 OK');
+                            echo json_encode($products);
+                            case 404:
+                                header('HTTP/1.1 404 Not Found');
+                            echo json_encode(['message' => 'No products found']);
+                            default:
+                            header('HTTP/1.1 500 Server Error');
+                            echo json_encode(['message' => 'No products found', 'sql' => $products]);
+                        }
+                        if($products['success']){
+                            
                         }else{
                             header('HTTP/1.1 404 Not Found');
                             echo json_encode(['message' => 'No products found']);

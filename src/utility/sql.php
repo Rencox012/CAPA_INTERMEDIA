@@ -759,12 +759,6 @@ function getBusquedaProductos($query, $filtro, $pagina){
         'errorText' => null
     ];
     try {
-        //log the recived data to log.txt
-        $log = fopen('log.txt', 'a');
-        fwrite($log, "Query: ".json_encode($query)."\n");
-        fwrite($log, "Filtro: ".json_encode($filtro)."\n");
-        fwrite($log, "Pagina: ".json_encode($pagina)."\n");
-        fclose($log);
         $conn = connect();
         $sql = "CALL GetBusquedaProductos(:query, :pagina, :filtro)";
         $stmt = $conn->prepare($sql);
