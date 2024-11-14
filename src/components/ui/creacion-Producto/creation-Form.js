@@ -171,11 +171,21 @@ function handleFormSubmit(){
         const coverPhoto = document.getElementById('coverPhoto').files[0];
         const nombreProducto = document.getElementById('nombre-producto').value;
         const videoUrl = document.getElementById('video-url').value;
+        let videoId = ""
         //Change the format of the video, from a normal link to an embed link
-        let videoId = videoUrl.split('v=')[1];
-        if(videoId.includes('&')){
-            videoId = videoId.split('&')[0];
+        if(videoUrl.contains('youtu.be')){
+            //If the video is a shortened link, get the id after the / and before anny & or ? in the url
+            videoId = videoUrl.split('/')[3];
+            if(videoId.includes('&')){
+                videoId = videoId.split('&')[0];
+            }
+        }else{
+            videoId = videoUrl.split('v=')[1];
+            if(videoId.includes('&')){
+                videoId = videoId.split('&')[0];
+            }
         }
+
         const newVideoUrl = `https://www.youtube.com/embed/${videoId}`;
 
         const tipo = document.getElementById('tipo-select').value;
