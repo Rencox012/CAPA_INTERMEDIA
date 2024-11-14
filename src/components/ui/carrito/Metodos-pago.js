@@ -116,8 +116,9 @@ async function handlePay(){
         }
         else{
             console.log("Transacción insertada correctamente");
-            //remove all elements from the productos array
-            productosArray.splice(0, productosArray.length);
+            //remove the product from the array
+            const index = productosArray.indexOf(producto);
+            productosArray.splice(index, 1);
             //reload the products in page
             const newProductos = await ProductoWrapper().updateProductos();
             //Replace the current page with the new one
