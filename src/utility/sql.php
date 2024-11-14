@@ -484,12 +484,8 @@ function insertProducto($idUsuario, $nombre, $cantidad, $descripcion, $precio, $
         'code' => null,
         'Text' => null
     ];
-    //prepare the connection
     $conn = connect();
     try{
-        //prepare the transaction
-
-
         $conn->beginTransaction();
         $sql = "CALL InsertarProducto(:idUsuario, :nombre, :cantidad, :descripcion, :precio, :portada, :tipo)";
         $stmt = $conn->prepare($sql);
@@ -498,9 +494,7 @@ function insertProducto($idUsuario, $nombre, $cantidad, $descripcion, $precio, $
         $stmt->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
         $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR_CHAR);
         $stmt->bindParam(':precio', $precio, PDO::PARAM_STR_CHAR);
-        // Check if $portada is valid
         if ( is_string($portada)) {
-            // Transform portada into base64
             $portada64 = blobToBase64($portada);
             $stmt->bindParam(':portada', $portada64, PDO::PARAM_STR_CHAR);
         } else {
@@ -509,17 +503,14 @@ function insertProducto($idUsuario, $nombre, $cantidad, $descripcion, $precio, $
         $stmt->bindParam(':portada', $portada64, PDO::PARAM_STR_CHAR);
         $stmt->bindParam(':tipo', $tipo, PDO::PARAM_STR_CHAR);
 
-        //Log to log.txt the data that is being sent
         $log = fopen('log.txt', 'a');
         fwrite($log, "Data: ".json_encode($stmt)."\n");
         fclose($log);
         $stmt->execute();
-        //if there were no mistakes, the sp will return the ID of the product
         $resultado['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //only send the elemt 0 of the array
         $resultado['data'] = $resultado['data'][0]['IDProducto'];
         $resultado['code'] = 200;
-        $stmt->closeCursor(); // Close the cursor to free up the connection to execute the next query
+        $stmt->closeCursor();
         $conn->commit();
 
 
