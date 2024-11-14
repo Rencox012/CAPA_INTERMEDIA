@@ -116,9 +116,6 @@ async function handlePay(){
         }
         else{
             console.log("Transacción insertada correctamente");
-            //remove the product from the array
-            const index = productosArray.indexOf(producto);
-            productosArray.splice(index, 1);
             //reload the products in page
             const newProductos = await ProductoWrapper().updateProductos();
             //Replace the current page with the new one
@@ -127,6 +124,13 @@ async function handlePay(){
         }
         console.log(response);
     }
+    //once all the transactions are inserted, clean the array
+    productosArray.length = 0;
+    //reload the total
+    const total = document.getElementById("total");
+    total.innerHTML = "$0";
+    alert("Compra realizada con éxito");
+    location.reload();
 }
 
 export function assignListeners(){
