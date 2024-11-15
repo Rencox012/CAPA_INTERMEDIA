@@ -1227,6 +1227,7 @@ function getProductoExisteLista($idLista, $idProducto){
 
             $resultado['data'] = $result;
         } else {
+            $resultado['success'] = false;
             $resultado['data'] = $result;
         }
     } catch (PDOException $e) {

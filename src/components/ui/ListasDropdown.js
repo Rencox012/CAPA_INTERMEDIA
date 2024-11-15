@@ -21,7 +21,7 @@ async function getProductoExisteLista(idLista, idProducto){
             let respuesta = await response.json();
             //access the object data and the field Existe
             let data = respuesta.data;
-            if(data.Existe !== null){
+            if(data.length !== 0){
                 return null;
             }
             else{

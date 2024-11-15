@@ -2,6 +2,7 @@
 import api from "../../api/api.js";
 import { User } from "../../utility/classes/User.js";
 import WishListWrapper from "./WishList-wrapper.js";
+import {assignEvents} from "./WishList-wrapper.js" 
 
 
 async function obtainLists(id){
@@ -46,6 +47,7 @@ function handleChangeList(){
         const wishlistContent = await WishListWrapper().render(select.value);
         //Change the html of the wishlist wrapper
         document.getElementById('wishlist-wrapper').innerHTML = wishlistContent;
+        assignEvents();
     }
     );
 }

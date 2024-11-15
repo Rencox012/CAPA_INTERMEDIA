@@ -40,14 +40,14 @@ async function deleteProductoLista( idProducto){
 }
 
 function handleDeleteProducto(){
-    const buttons = document.querySelectorAll('#delete-button');
+    const buttons = document.querySelectorAll('#delete-list-product-button');
     if(buttons === null){
         return;
     }
 
     buttons.forEach((button) => {
         button.addEventListener('click', async (event) => {
-            const idElemento = event.target.parentElement.parentElement.id;
+            const idElemento = event.target.getAttribute('key');
             const response = await deleteProductoLista(idElemento);
             if(response !== null){
                 window.location.reload();
@@ -100,7 +100,8 @@ export default function WishListWrapper(){
                         <div class="flex items-center justify-end">
                             <span class="text-white font-semibold">$${producto.PrecioProducto}</span>
                             <button
-                            id="delete-button"
+                            id="delete-list-product-button"
+                            key = "${producto.IDElemento}"
                             class = "transition-all bg-red-500 hover:bg-red-700 hover:scale-105 text-white font-bold p-2 rounded-md ml-2 active:bg-red-400 active:scale-90"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
