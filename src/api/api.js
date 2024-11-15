@@ -344,7 +344,7 @@ const api = {
                 });
         },
         getListasOtroUsuario: async function(id){
-            return fetch(`/CAPA_INTERMEDIA/src/server/listas.php/obtainListsOther?id=${id}` ,
+            return fetch(`/CAPA_INTERMEDIA/src/server/listas.php/getListasOtroUsuario?id=${id}` ,
                 {
                     method: 'GET',
                     headers: {
