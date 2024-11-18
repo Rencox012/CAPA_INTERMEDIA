@@ -21,7 +21,7 @@ export default function ventasWrapper(){
             <div id="${idTransaccion}" class="bg-white rounded-lg shadow-md p-6 max-w-md w-full">
                 <div class="flex items center justify-between mb-4">
                     <span class="text-sm text-gray-500">ID Transacción: #${idTransaccion}</span>
-                    <span class="text-sm text-gray-500">Fecha: ${fechaVenta}</span>
+                    <span id="fecha-venta" class="text-sm text-gray-500">Fecha: ${fechaVenta}</span>
                 </div>
                 <div class="mb-4">
                     ${categoriasHTML}

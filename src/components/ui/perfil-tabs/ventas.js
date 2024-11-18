@@ -104,6 +104,10 @@ function filterCategory(){
         }
         ventasArray.forEach((venta) => {
             const categorias = venta.Categorias;
+            if(categorias === null || categorias.length === 0){
+                document.getElementById(venta.IDTransaccion).classList.add('hidden');
+                return;
+            }
             //iterate through the categories of the product
             let found = false;
             categorias.forEach((cat) => {
@@ -160,15 +164,22 @@ export default function ventas(){
             }
 
 
-            const ventasHTML = await Promise.all(
-                ventas.map(async (venta) => {
-                    ventasArray.push(venta);
-                    const categoriasProducto = await getCategoriasProducto(venta.IDProducto);
-                    ventasArray[ventasArray.length - 1].Categorias = categoriasProducto;
-                    const foto = await getFotoProducto(venta.IDProducto);
-                    return ventasWrapper().render(venta.IDTransaccion, venta.IDProducto, venta.PrecioProducto, venta.FechaVenta, venta.NombreProducto, venta.CalificacionProducto, venta.ExistenciaActual, foto[0].Portada, categoriasProducto);
-                })
-            )
+            let ventasHTML = "";
+            for (const venta of ventas){
+                const categorias = await getCategoriasProducto(venta.IDProducto);
+                const foto = await getFotoProducto(venta.IDProducto);
+                ventasArray.push({
+                    IDTransaccion: venta.IDTransaccion,
+                    IDProducto: venta.IDProducto,
+                    PrecioProducto: venta.PrecioProducto,
+                    FechaVenta: venta.FechaVenta,
+                    NombreProducto: venta.NombreProducto,
+                    CalificacionProducto: venta.CalificacionProducto,
+                    ExistenciaActual: venta.ExistenciaActual,
+                    Categorias: categorias
+                });
+                ventasHTML += ventasWrapper().render(venta.IDTransaccion, venta.IDProducto, venta.PrecioProducto, venta.FechaVenta, venta.NombreProducto, venta.CalificacionProducto, venta.ExistenciaActual, foto[0].Portada, categorias);
+            }
             return `
             <div id="Filtros" class = "text-white mb-4">
                 <h2
@@ -232,7 +243,7 @@ export default function ventas(){
                 <div class="flex flex-col  overflow-hidden h-full">
                     
                     <div class="flex flex-col items-center justify-items-center w-full h-full overflow-y-scroll gap-2 pb-32">
-                        ${ventasHTML.join("")}
+                        ${ventasHTML}
                     </div>
                 </div>
             `;

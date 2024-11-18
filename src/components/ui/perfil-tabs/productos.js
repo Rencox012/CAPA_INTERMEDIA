@@ -49,6 +49,10 @@ function filterCategory(){
         }
         productosArray.forEach((producto) => {
             const categorias = producto.categorias;
+            if (categorias === null || categorias.length === 0){
+                document.getElementById(producto.IDProducto).classList.add('hidden');
+                return;
+            }
             //iterate through the categories of the product
             let found = false;
             categorias.forEach((cat) => {
@@ -85,19 +89,21 @@ export default function productos(){
                 `
             }
 
-            const productosHTML = await Promise.all(
-                productos.map(async (producto) => {
-                    if(producto.Status === 'Pendinte' || producto.Status === 'Rechazado'){
-                        return;
-                    }
-                    productosArray.push(producto);
-                    const foto = await getProductoFoto(producto.IDProducto);
-                    const categorias = await getCategoriasProducto(producto.IDProducto);
-                    productosArray[productosArray.length - 1].categorias = categorias;
-                    return productosWrapper().render(producto.IDProducto, producto.Precio, producto.Tipo, producto.Nombre, producto.Status, producto.Cantidad, foto[0].Portada, categorias);
-
-                })
-            )
+            let productosHTML = "";
+            for (const producto of productos) {
+                const foto = await getProductoFoto(producto.IDProducto);
+                const categorias = await getCategoriasProducto(producto.IDProducto);
+                productosArray.push({
+                    IDProducto: producto.IDProducto,
+                    Nombre: producto.Nombre,
+                    Precio: producto.Precio,
+                    Cantidad: producto.Cantidad,
+                    categorias: categorias,
+                    tipo: producto.Tipo,
+                    status: producto.Status
+                });
+                productosHTML += productosWrapper().render(producto.IDProducto, producto.Precio, producto.Tipo, producto.Nombre, producto.Tipo, producto.Cantidad, foto[0].Portada, categorias);
+            }
             return `
             <div id="Filtros-Productos" class = "text-white mb-4">
                 <h2
@@ -129,7 +135,7 @@ export default function productos(){
             </div>
                 <div class="productos-container">
                     <div class="flex flex-col items-center justify-items-center w-full overflow-y-scroll gap-2">
-                        ${productosHTML.join("")}
+                        ${productosHTML}
                     </div>
                 </div>
             `
