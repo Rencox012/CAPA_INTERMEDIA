@@ -305,6 +305,33 @@ const api = {
                         idProducto: idProducto
                     })
                 });
+        },
+        getTarjetaProducto(idProducto){
+            return fetch(`/CAPA_INTERMEDIA/src/server/productos.php/getTarjetaProducto?idProducto=${idProducto}` ,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+        },
+        getProductosMejorValorados(){
+            return fetch(`/CAPA_INTERMEDIA/src/server/productos.php/getProductosMejorValorados` ,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+        },
+        getProductosMasVendidos(){
+        return fetch(`/CAPA_INTERMEDIA/src/server/productos.php/getProductosMasVendidos` ,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
         }
     },
     comments: {

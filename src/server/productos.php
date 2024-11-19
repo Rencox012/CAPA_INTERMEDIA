@@ -309,6 +309,27 @@ switch($method){
                 }
                 break;
 
+            case 'getTarjetaProducto':
+                if(isset($_GET['idProducto'])){
+                    $idProducto = $_GET['idProducto'];
+                    try{
+                        $tarjeta = getTarjetaProducto($idProducto);
+                        if($tarjeta['success']){
+                            header('HTTP/1.1 200 OK');
+                            echo json_encode($tarjeta['data']);
+                        }else{
+                            header('HTTP/1.1 404 Not Found');
+                            echo json_encode(['message' => 'No product found']);
+                        }
+                    }catch(PDOException $e){
+                        echo "Error: " . $e->getMessage();
+                    }
+                }else{
+                    header('HTTP/1.1 400 Bad Request');
+                    echo json_encode(['message' => 'Id is required']);
+                }
+                break;
+
             case 'getProductosUsuario':
                 if(isset($_GET['idUsuario'])){
                     $idUsuario = $_GET['idUsuario'];
@@ -327,6 +348,68 @@ switch($method){
                 }else{
                     header('HTTP/1.1 400 Bad Request');
                     echo json_encode(['message' => 'Id is required']);
+                }
+                break;
+
+            case 'getProductosMejorValorados':
+                try{
+                    $products = getProductosMejorValorados();
+                    if($products['success']){
+                        switch ($products['code']) {
+                            case 200:
+                                header('HTTP/1.1 200 OK');
+                                echo json_encode($products['data']);
+                                break;
+                            case 201:
+                                header('HTTP/1.1 201 Created');
+                                echo json_encode($products);
+                                break;
+                            case 404:
+                                header('HTTP/1.1 404 Not Found');
+                                echo json_encode(['message' => 'No products found']);
+                                break;
+                            default:
+                                header('HTTP/1.1 500 Internal Server Error');
+                                echo json_encode(['message' => 'Internal Server Error', 'data' => $products]);
+                                break;
+                        }
+                    }else{
+                        header('HTTP/1.1 404 Not Found');
+                        echo json_encode(['message' => 'No products found']);
+                    }
+                }catch(PDOException $e){
+                    echo "Error: " . $e->getMessage();
+                }
+                break;
+
+            case 'getProductosMasVendidos':
+                try{
+                    $products = getProductosMasVendidos();
+                    if($products['success']){
+                        switch ($products['code']) {
+                            case 200:
+                                header('HTTP/1.1 200 OK');
+                                echo json_encode($products['data']);
+                                break;
+                            case 201:
+                                header('HTTP/1.1 201 Created');
+                                echo json_encode($products);
+                                break;
+                            case 404:
+                                header('HTTP/1.1 404 Not Found');
+                                echo json_encode(['message' => 'No products found']);
+                                break;
+                            default:
+                                header('HTTP/1.1 500 Internal Server Error');
+                                echo json_encode(['message' => 'Internal Server Error', 'data' => $products]);
+                                break;
+                        }
+                    }else{
+                        header('HTTP/1.1 404 Not Found');
+                        echo json_encode(['message' => 'No products found']);
+                    }
+                }catch(PDOException $e){
+                    echo "Error: " . $e->getMessage();
                 }
                 break;
 

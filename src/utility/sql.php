@@ -1014,6 +1014,112 @@ function deleteProducto($idProducto){
         return $resultado;
     }
 }
+function getTarjetaProducto($idProducto){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'errorCode' => null,
+        'errorText' => null
+    ];
+    try {
+        $conn = connect();
+        $sql = "CALL GetTarjetaProducto(:idProducto)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idProducto', $idProducto, PDO::PARAM_STR_CHAR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //if we have a result, return it
+        if (count($result) > 0){
+            $resultado['data'] = $result;
+            $resultado['success'] = true;
+            $resultado['code'] = 200;
+        } else {
+            //if we don't have a result, return an empty array
+            $resultado['success'] = true;
+            $resultado['code'] = 201;
+            $resultado['errorText'] = 'No products found';
+        }
+    } catch (PDOException $e) {
+        // Handle error
+        $resultado['success'] = false;
+        $resultado['code'] = 500;
+        $resultado['errorText'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    }
+}
+function getProductosMejorValorados(){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'code' => null,
+        'errorText' => null
+    ];
+    try {
+        $conn = connect();
+        $sql = "CALL GetProductosMejorValorados()";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        //if we have a result, return it
+        if (count($result) > 0){
+            $resultado['data'] = $result;
+            $resultado['success'] = true;
+            $resultado['code'] = 200;
+        } else {
+            //if we don't have a result, return an empty array
+            $resultado['success'] = true;
+            $resultado['code'] = 201;
+            $resultado['errorText'] = 'No products found';
+        }
+    } catch (PDOException $e) {
+        // Handle error
+        $resultado['success'] = false;
+        $resultado['code'] = 500;
+        $resultado['errorText'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    }
+}
+function getProductosMasVendidos(){
+    $resultado = [
+        'success' => true,
+        'data' => [],
+        'code' => null,
+        'errorText' => null
+    ];
+    try {
+        $conn = connect();
+        $sql = "CALL GetProductosMasVendidos()";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        //if we have a result, return it
+        if (count($result) > 0){
+            $resultado['data'] = $result;
+            $resultado['success'] = true;
+            $resultado['code'] = 200;
+        } else {
+            //if we don't have a result, return an empty array
+            $resultado['success'] = true;
+            $resultado['code'] = 201;
+            $resultado['errorText'] = 'No products found';
+        }
+    } catch (PDOException $e) {
+        // Handle error
+        $resultado['success'] = false;
+        $resultado['code'] = 500;
+        $resultado['errorText'] = $e->getMessage();
+    } finally {
+        close_connection();
+        return $resultado;
+    }
+}
 #endregion
 #region Comentarios
 function obtainComments($id){

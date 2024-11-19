@@ -26,16 +26,28 @@
         }
        
     </script>
-<div id = "main-productos">
-    <div id="results" class="w-full">
-      <script type="module">
-        import MainResults from "./components/ui/Main-results.js";
-        const resultsContainer = document.getElementById('results');
-        const results = await MainResults().render();
-        resultsContainer.innerHTML = results;
-      </script>
+    <div id = "main-productos">
+        <div id="results" class="w-full">
+          <script type="module">
+            import MainResults from "./components/ui/Main-results.js";
+            const resultsContainer = document.getElementById('results');
+            const masVendidosContainer = document.getElementById('mas-vendidos');
+            const mejorValoradosContainer = document.getElementById('mejor-valorados');
+            const results = await MainResults().render();
+            const resultadosVentas = await MainResults().renderMasVendidos();
+            const resultadosValorados = await MainResults().renderMejorValorados();
+            resultsContainer.innerHTML = results;
+            masVendidosContainer.innerHTML = resultadosVentas;
+            mejorValoradosContainer.innerHTML = resultadosValorados;
+          </script>
+        </div>
     </div>
-</div>
+    <div id="mas-vendidos">
+
+    </div>
+    <div id="mejor-valorados">
+
+    </div>
      
 
 <script type="module">
